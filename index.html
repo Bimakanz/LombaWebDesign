@@ -60,7 +60,7 @@
       <a href="#fitur" class="mobile-link">Fitur</a>
       <a href="#cara-kerja" class="mobile-link">Cara Kerja</a>
       <a href="#tentang" class="mobile-link">Tentang</a>
-      <a href="#" class="mobile-cta-btn btn-login">Pantau Ananda</a>
+      <a href=".vscode/Login.html" class="mobile-cta-btn">Pantau Ananda</a>
     </div>
   </header>
 
@@ -89,7 +89,7 @@
         Visualisasikan nilai, lacak tren, dan tetap terhubung dengan perkembangan belajar anak Anda.
       </p>
       <div class="hero-actions">
-        <a href="#" class="btn-primary btn-login" id="hero-cta-btn">
+        <a href=".vscode/Login.html" class="btn-primary" id="hero-cta-btn">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M2 12C2 12 5 5 12 5C19 5 22 12 22 12C22 12 19 19 12 19C5 19 2 12 2 12Z" />
             <circle cx="12" cy="12" r="3" />
@@ -277,8 +277,8 @@
             profesional.</p>
         </div>
         <div class="step-connector">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7" />
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6" />
           </svg>
         </div>
         <div class="step-card" id="step-card-2">
@@ -294,8 +294,8 @@
             ke Dashboard.</p>
         </div>
         <div class="step-connector">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7" />
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6" />
           </svg>
         </div>
         <div class="step-card" id="step-card-3">
@@ -313,12 +313,13 @@
         </div>
       </div>
       <div class="howto-cta">
-        <a href="#" class="btn-primary large btn-login" id="howto-cta-btn">
+        <a href=".vscode/Login.html" class="btn-primary large" id="howto-cta-btn">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M2 12C2 12 5 5 12 5C19 5 22 12 22 12C22 12 19 19 12 19C5 19 2 12 2 12Z" />
-            <circle cx="12" cy="12" r="3" />
+            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+            <polyline points="10 17 15 12 10 7" />
+            <line x1="15" y1="12" x2="3" y2="12" />
           </svg>
-          Mulai Sekarang — Gratis!
+          Masuk Sekarang
         </a>
       </div>
     </div>
@@ -424,7 +425,7 @@
         <a href="#fitur">Fitur</a>
         <a href="#cara-kerja">Cara Kerja</a>
         <a href="#tentang">Tentang</a>
-        <a href="#" class="btn-login">Dashboard</a>
+        <a href=".vscode/Login.html">Dashboard</a>
       </div>
       <div class="footer-links">
         <h4>Platform</h4>
@@ -561,29 +562,6 @@
             <a href="https://wa.me/6281234567890" target="_blank" class="btn-wa">Chat WhatsApp</a>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ===== MODAL LOGIN ===== -->
-  <div class="modal-overlay" id="login-modal">
-    <div class="modal-content" style="max-width: 400px;">
-      <div class="modal-header">
-        <h3 class="modal-title">Masuk ke Dashboard</h3>
-        <button class="modal-close" id="login-close">&times;</button>
-      </div>
-      <div class="modal-body">
-        <p style="margin-bottom: 1rem; color: var(--text-muted); font-size: 0.95rem;">Silakan masukkan Nomor Induk Siswa (NIS) untuk melihat data akademik.</p>
-        <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.5rem;">
-          <label for="nis-input" style="font-weight: 600; font-size: 0.875rem; color: var(--text-main);">Nomor Induk Siswa (NIS)</label>
-          <input type="text" id="nis-input" placeholder="Contoh: 2425100123" style="padding: 0.75rem; border: 1px solid var(--border-light); border-radius: var(--radius-md); font-family: inherit; font-size: 1rem; outline: none; transition: border-color 0.2s; background-color: var(--bg-body); color: var(--text-main);">
-          
-          <label for="password-input" style="font-weight: 600; font-size: 0.875rem; color: var(--text-main); margin-top: 0.5rem;">Password</label>
-          <input type="password" id="password-input" placeholder="Masukkan password" style="padding: 0.75rem; border: 1px solid var(--border-light); border-radius: var(--radius-md); font-family: inherit; font-size: 1rem; outline: none; transition: border-color 0.2s; background-color: var(--bg-body); color: var(--text-main);">
-          
-          <span id="login-error" style="color: var(--accent-red); font-size: 0.875rem; display: none;">NIS atau Password salah. Silakan periksa kembali.</span>
-        </div>
-        <button id="login-submit" class="btn-primary" style="width: 100%; justify-content: center;">Masuk</button>
       </div>
     </div>
   </div>

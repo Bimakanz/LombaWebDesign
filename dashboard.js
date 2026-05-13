@@ -396,31 +396,87 @@ function renderLineChart() {
 
 function renderRadarChart() {
   const ctx = document.getElementById('radarChart').getContext('2d');
-  const labels = dataSiswa.detail_nilai.map(g => g.mapel);
-  const data = dataSiswa.detail_nilai.map(g => g.nilai);
+  
+  // Sort and select top 4 subjects to avoid overlaps and match reference design perfectly
+  const sortedNilai = [...dataSiswa.detail_nilai]
+    .sort((a, b) => b.nilai - a.nilai)
+    .slice(0, 4);
+
+  const labels = sortedNilai.map(g => g.mapel);
+  const data = sortedNilai.map(g => g.nilai);
+
+  // Custom Chart.js plugin to draw labels directly inside the pie slices
+  const inlineLabelsPlugin = {
+    id: 'inlineLabels',
+    afterDraw(chart) {
+      const { ctx, data } = chart;
+      ctx.save();
+      chart.data.datasets.forEach((dataset, i) => {
+        const meta = chart.getDatasetMeta(i);
+        meta.data.forEach((element, index) => {
+          const { x, y, startAngle, endAngle, outerRadius } = element;
+          const angle = startAngle + (endAngle - startAngle) / 2;
+          
+          // Place label at 55% of the outer radius for perfect center alignment
+          const labelRadius = outerRadius * 0.55;
+          const labelX = x + Math.cos(angle) * labelRadius;
+          const labelY = y + Math.sin(angle) * labelRadius;
+          
+          const value = dataset.data[index];
+          const total = dataset.data.reduce((sum, v) => sum + v, 0);
+          const percentage = total > 0 ? Math.round((value / total) * 100) + '%' : '';
+          const labelText = data.labels[index];
+          
+          // Text styling: white with subtle shadow for extreme readability on all colors
+          ctx.fillStyle = '#FFFDF5';
+          ctx.shadowColor = 'rgba(0, 0, 0, 0.4)';
+          ctx.shadowBlur = 4;
+          ctx.font = 'bold 11px "Inter", sans-serif';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          
+          // Render label text and percentage in 2 stacked lines
+          ctx.fillText(labelText, labelX, labelY - 7);
+          ctx.fillText(percentage, labelX, labelY + 7);
+        });
+      });
+      ctx.restore();
+    }
+  };
 
   new Chart(ctx, {
-    type: 'doughnut',
+    type: 'pie',
     data: {
       labels: labels,
       datasets: [{
-        label: 'Nilai',
+        label: 'Proporsi Nilai',
         data: data,
         backgroundColor: [
-          colors.primary, colors.secondary, colors.purple, colors.orange,
-          colors.teal, colors.pink, colors.primaryLight, colors.secondaryLight, '#B5944A'
+          colors.primary,    // #89986D
+          colors.orange,     // #B5944A
+          colors.teal,       // #6B8F71
+          colors.purple      // #8B7355
         ],
         borderWidth: 2,
         borderColor: '#FFFDF5',
-        hoverOffset: 4
+        hoverOffset: 6
       }]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      cutout: '65%',
-      plugins: { legend: { display: false } }
-    }
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              return ` ${context.label}: ${context.raw} (Nilai)`;
+            }
+          }
+        }
+      }
+    },
+    plugins: [inlineLabelsPlugin]
   });
 }
 

@@ -966,7 +966,7 @@ button {
 
 .step-connector {
   display: none;
-  color: var(--border-light);
+  color: var(--primary-light);
 }
 
 .howto-cta {
