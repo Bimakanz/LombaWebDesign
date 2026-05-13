@@ -1352,6 +1352,22 @@ button {
   color: var(--text-main);
 }
 
+.sidebar-logout {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 0.875rem;
+  transition: all var(--transition-fast);
+}
+
+.sidebar-logout:hover {
+  color: var(--text-main);
+}
+
 .sidebar-link.active {
   background-color: rgba(30, 64, 175, 0.05);
   color: var(--primary);
