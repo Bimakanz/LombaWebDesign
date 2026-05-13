@@ -481,7 +481,7 @@ function renderRadarChart() {
 }
 
 function renderGradesBarChart() {
-  // Duplicate chart for the grades section
+  // Duplikat Grafik Untuk Bagian Grades
   const ctx = document.getElementById('gradesBarChart').getContext('2d');
   const labels = dataSiswa.detail_nilai.map(g => g.mapel);
   const data = dataSiswa.detail_nilai.map(g => g.nilai);
@@ -506,7 +506,7 @@ function renderGradesBarChart() {
 }
 
 function renderTrendLineChart() {
-  // Duplicate chart for the trend section
+  // Duplikat Grafik Untuk Bagian Trend
   const ctx = document.getElementById('trendLineChart').getContext('2d');
   const labels = dataSiswa.perkembangan_semester.map(h => h.semester);
   const data = dataSiswa.perkembangan_semester.map(h => h.rata_rata);
