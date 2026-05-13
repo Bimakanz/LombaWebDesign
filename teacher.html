@@ -1,0 +1,209 @@
+<!-- teacher.html -->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard Guru — Cognitia</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <link rel="stylesheet" href="style.css"/>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="dashboard-page">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <div class="sidebar-header">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-icon">
+          <svg width="24" height="24" viewBox="0 0 28 28" fill="none">
+            <path d="M14 2L4 7v7c0 6.1 4.3 11.8 10 13 5.7-1.2 10-6.9 10-13V7L14 2z" fill="#89986D"/>
+            <path d="M9 14l3 3 7-7" stroke="white" stroke-width="2"/>
+          </svg>
+        </div>
+
+        <span class="logo-text">Cognitia</span>
+      </a>
+    </div>
+
+    <div class="sidebar-profile">
+      <div class="profile-avatar">PB</div>
+
+      <div class="profile-info">
+        <span class="profile-name">Pak Budi</span>
+        <span class="profile-class">Guru Matematika</span>
+      </div>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <nav class="sidebar-nav">
+
+      <p class="nav-section-label">MENU</p>
+
+      <a href="#" class="sidebar-link active">
+        <span>Dashboard</span>
+      </a>
+
+      <a href="#">
+        <span>Data Siswa</span>
+      </a>
+
+      <a href="#">
+        <span>Input Nilai</span>
+      </a>
+
+      <a href="#">
+        <span>Laporan</span>
+      </a>
+
+    </nav>
+
+  </aside>
+
+  <!-- MAIN -->
+  <main class="dashboard-main">
+
+    <!-- HEADER -->
+    <div class="dash-header">
+
+      <div>
+        <h1 class="dash-title">Dashboard Guru</h1>
+
+        <p class="dash-subtitle">
+          Selamat datang kembali,
+          <strong>Pak Budi</strong>
+        </p>
+      </div>
+
+      <div class="date-badge">
+        <span id="current-date"></span>
+      </div>
+
+    </div>
+
+    <!-- CARDS -->
+    <div class="insight-cards">
+
+      <div class="insight-card blue">
+        <div class="icard-content">
+          <span class="icard-label">Total Siswa</span>
+          <span class="icard-value">36</span>
+          <span class="icard-sub">XI IPA 1</span>
+        </div>
+      </div>
+
+      <div class="insight-card green">
+        <div class="icard-content">
+          <span class="icard-label">Rata-rata Kelas</span>
+          <span class="icard-value">87.4</span>
+          <span class="icard-sub">Semester Genap</span>
+        </div>
+      </div>
+
+      <div class="insight-card purple">
+        <div class="icard-content">
+          <span class="icard-label">Nilai Tertinggi</span>
+          <span class="icard-value">98</span>
+          <span class="icard-sub">Matematika</span>
+        </div>
+      </div>
+
+      <div class="insight-card red">
+        <div class="icard-content">
+          <span class="icard-label">Belum Dinilai</span>
+          <span class="icard-value">12</span>
+          <span class="icard-sub">Tugas Pending</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CHART -->
+    <div class="chart-card" style="margin-top: 2rem;">
+
+      <div class="chart-card-header">
+        <div>
+          <h3 class="chart-title">Grafik Rata-rata Nilai</h3>
+          <p class="chart-sub">Per Mata Pelajaran</p>
+        </div>
+      </div>
+
+      <div class="chart-wrapper">
+        <canvas id="teacherChart"></canvas>
+      </div>
+
+    </div>
+
+    <!-- TABLE -->
+    <div class="chart-card" style="margin-top: 2rem;">
+
+      <div class="chart-card-header">
+        <h3 class="chart-title">Data Siswa</h3>
+      </div>
+
+      <div class="summary-table-wrapper">
+
+        <table class="summary-table">
+
+          <thead>
+            <tr>
+              <th>Nama</th>
+              <th>Kelas</th>
+              <th>Rata-rata</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            <tr>
+              <td>Bima Sena</td>
+              <td>XI IPA 1</td>
+              <td>92</td>
+              <td>Lulus</td>
+            </tr>
+
+            <tr>
+              <td>Rais Bima</td>
+              <td>XI IPA 1</td>
+              <td>88</td>
+              <td>Lulus</td>
+            </tr>
+
+            <tr>
+              <td>Andi Saputra</td>
+              <td>XI IPA 1</td>
+              <td>76</td>
+              <td>Perlu Bimbingan</td>
+            </tr>
+
+            <tr>
+              <td>Siti Aulia</td>
+              <td>XI IPA 1</td>
+              <td>95</td>
+              <td>Lulus</td>
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <script src="teacher.js"></script>
+
+</body>
+</html>
