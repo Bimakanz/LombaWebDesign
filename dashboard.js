@@ -68,7 +68,7 @@ const colors = {
   textMuted: '#6B7A54'
 };
 
-const mapelColors = [colors.primary, colors.purple, colors.teal, colors.orange];
+const mapelColors = [colors.primary, colors.purple, colors.teal, colors.orange, colors.pink, '#7A9E7E', '#A89060', '#5F8A6A', '#C4A86E'];
 
 document.addEventListener('DOMContentLoaded', () => {
   
@@ -122,9 +122,9 @@ document.addEventListener('DOMContentLoaded', () => {
     renderReportSection();
     
     // Render Charts
-    renderBarChart();
     renderLineChart();
-    renderRadarChart();
+    renderPieChart();
+    renderLeaderboard();
     renderGradesBarChart();
     renderTrendLineChart();
     
@@ -394,72 +394,56 @@ function renderLineChart() {
   });
 }
 
-function renderRadarChart() {
-  const ctx = document.getElementById('radarChart').getContext('2d');
-  
-  // Sort and select top 4 subjects to avoid overlaps and match reference design perfectly
-  const sortedNilai = [...dataSiswa.detail_nilai]
-    .sort((a, b) => b.nilai - a.nilai)
-    .slice(0, 4);
+const mapelColorsAll = [
+  colors.primary,    // #89986D
+  colors.orange,     // #B5944A
+  colors.teal,       // #6B8F71
+  colors.purple,     // #8B7355
+  colors.pink,       // #B07D6A
+  '#7A9E7E',
+  '#A89060',
+  '#5F8A6A',
+  '#C4A86E'
+];
 
-  const labels = sortedNilai.map(g => g.mapel);
-  const data = sortedNilai.map(g => g.nilai);
+function renderPieChart() {
+  const ctx = document.getElementById('pieChart').getContext('2d');
+  const grades = dataSiswa.detail_nilai;
+  const labels = grades.map(g => g.mapel);
+  const data = grades.map(g => g.nilai);
+  const bgColors = grades.map((_, i) => mapelColorsAll[i % mapelColorsAll.length]);
 
-  // Custom Chart.js plugin to draw labels directly inside the pie slices
-  const inlineLabelsPlugin = {
-    id: 'inlineLabels',
-    afterDraw(chart) {
-      const { ctx, data } = chart;
-      ctx.save();
-      chart.data.datasets.forEach((dataset, i) => {
-        const meta = chart.getDatasetMeta(i);
-        meta.data.forEach((element, index) => {
-          const { x, y, startAngle, endAngle, outerRadius } = element;
-          const angle = startAngle + (endAngle - startAngle) / 2;
-          
-          // Place label at 55% of the outer radius for perfect center alignment
-          const labelRadius = outerRadius * 0.55;
-          const labelX = x + Math.cos(angle) * labelRadius;
-          const labelY = y + Math.sin(angle) * labelRadius;
-          
-          const value = dataset.data[index];
-          const total = dataset.data.reduce((sum, v) => sum + v, 0);
-          const percentage = total > 0 ? Math.round((value / total) * 100) + '%' : '';
-          const labelText = data.labels[index];
-          
-          // Text styling: white with subtle shadow for extreme readability on all colors
-          ctx.fillStyle = '#FFFDF5';
-          ctx.shadowColor = 'rgba(0, 0, 0, 0.4)';
-          ctx.shadowBlur = 4;
-          ctx.font = 'bold 11px "Inter", sans-serif';
-          ctx.textAlign = 'center';
-          ctx.textBaseline = 'middle';
-          
-          // Render label text and percentage in 2 stacked lines
-          ctx.fillText(labelText, labelX, labelY - 7);
-          ctx.fillText(percentage, labelX, labelY + 7);
-        });
-      });
-      ctx.restore();
-    }
-  };
+  // Build custom legend list (always visible, works on mobile too)
+  const legendEl = document.getElementById('pie-legend-list');
+  if (legendEl) {
+    legendEl.innerHTML = '';
+    grades.forEach((g, i) => {
+      const color = bgColors[i];
+      const total = data.reduce((a, b) => a + b, 0);
+      const pct = ((g.nilai / total) * 100).toFixed(1);
+      const item = document.createElement('div');
+      item.className = 'pie-legend-item';
+      item.innerHTML = `
+        <span class="pie-legend-dot" style="background:${color};"></span>
+        <span class="pie-legend-name">${g.mapel}</span>
+        <span class="pie-legend-score">${g.nilai}</span>
+        <span class="pie-legend-pct">${pct}%</span>
+      `;
+      legendEl.appendChild(item);
+    });
+  }
 
   new Chart(ctx, {
     type: 'pie',
     data: {
       labels: labels,
       datasets: [{
-        label: 'Proporsi Nilai',
+        label: 'Nilai',
         data: data,
-        backgroundColor: [
-          colors.primary,    // #89986D
-          colors.orange,     // #B5944A
-          colors.teal,       // #6B8F71
-          colors.purple      // #8B7355
-        ],
+        backgroundColor: bgColors,
         borderWidth: 2,
         borderColor: '#FFFDF5',
-        hoverOffset: 6
+        hoverOffset: 10
       }]
     },
     options: {
@@ -468,15 +452,99 @@ function renderRadarChart() {
       plugins: {
         legend: { display: false },
         tooltip: {
+          enabled: true,
+          backgroundColor: 'rgba(45, 56, 32, 0.97)',
+          titleColor: '#FFFDF5',
+          bodyColor: '#C5D89D',
+          borderColor: '#89986D',
+          borderWidth: 1,
+          padding: 12,
+          cornerRadius: 8,
+          displayColors: true,
           callbacks: {
+            title: function(items) {
+              return items[0].label;
+            },
             label: function(context) {
-              return ` ${context.label}: ${context.raw} (Nilai)`;
+              const total = context.dataset.data.reduce((a, b) => a + b, 0);
+              const pct = ((context.raw / total) * 100).toFixed(1);
+              return `  Nilai: ${context.raw}  (${pct}%)`;
             }
           }
         }
       }
-    },
-    plugins: [inlineLabelsPlugin]
+    }
+  });
+}
+
+function renderLeaderboard() {
+  const container = document.getElementById('leaderboard-list');
+  if (!container) return;
+
+  const top5 = [...dataSiswa.detail_nilai]
+    .sort((a, b) => b.nilai - a.nilai)
+    .slice(0, 5);
+
+  const medals = ['🥇', '🥈', '🥉', '', ''];
+  const rankColors = [
+    { bg: 'rgba(181,148,74,0.12)', border: '#B5944A', text: '#8B6914' },
+    { bg: 'rgba(160,160,160,0.12)', border: '#A0A0A0', text: '#666' },
+    { bg: 'rgba(160,100,60,0.12)', border: '#A0643C', text: '#7A4020' },
+    { bg: 'rgba(137,152,109,0.08)', border: 'var(--border-light)', text: 'var(--text-muted)' },
+    { bg: 'rgba(137,152,109,0.08)', border: 'var(--border-light)', text: 'var(--text-muted)' }
+  ];
+
+  function getStars(nilai) {
+    let stars = 0;
+    if (nilai >= 95) stars = 5;
+    else if (nilai >= 88) stars = 4;
+    else if (nilai >= 80) stars = 3;
+    else if (nilai >= 70) stars = 2;
+    else stars = 1;
+    return stars;
+  }
+
+  function renderStars(stars) {
+    let html = '';
+    for (let i = 1; i <= 5; i++) {
+      html += `<svg width="14" height="14" viewBox="0 0 24 24" fill="${i <= stars ? '#B5944A' : 'none'}" stroke="${i <= stars ? '#B5944A' : '#C5B898'}" stroke-width="2" style="flex-shrink:0"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>`;
+    }
+    return html;
+  }
+
+  container.innerHTML = '';
+  top5.forEach((item, i) => {
+    const c = rankColors[i];
+    const stars = getStars(item.nilai);
+    const row = document.createElement('div');
+    row.className = 'lb-row';
+    row.style.cssText = `
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 14px; margin-bottom: 10px;
+      background: ${c.bg}; border: 1px solid ${c.border};
+      border-radius: 12px; transition: transform 0.15s, box-shadow 0.15s;
+    `;
+    row.onmouseenter = () => { row.style.transform = 'translateY(-2px)'; row.style.boxShadow = '0 4px 14px rgba(0,0,0,0.08)'; };
+    row.onmouseleave = () => { row.style.transform = ''; row.style.boxShadow = ''; };
+
+    row.innerHTML = `
+      <!-- Rank -->
+      <div style="width:36px; text-align:center; font-size:${medals[i] ? '1.4rem' : '1rem'}; font-weight:800; color:${c.text}; flex-shrink:0;">
+        ${medals[i] || (i + 1)}
+      </div>
+      <!-- Avatar -->
+      <div style="width:40px; height:40px; border-radius:50%; background:${mapelColorsAll[i % mapelColorsAll.length]}; display:flex; align-items:center; justify-content:center; flex-shrink:0; color:#fff; font-weight:700; font-size:0.9rem;">
+        ${item.mapel.slice(0,2).toUpperCase()}
+      </div>
+      <!-- Name + Stars -->
+      <div style="flex:1; min-width:0;">
+        <div style="font-weight:700; font-size:0.95rem; color:var(--text-dark); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${item.mapel}</div>
+        <div style="display:flex; gap:2px; margin-top:3px;">${renderStars(stars)}</div>
+      </div>
+      <!-- Score -->
+      <div style="font-size:1.1rem; font-weight:800; font-family:var(--font-display); color:${c.text}; flex-shrink:0;">${item.nilai}</div>
+    `;
+    container.appendChild(row);
   });
 }
 

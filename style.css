@@ -1352,6 +1352,24 @@ button {
   color: var(--text-main);
 }
 
+.sidebar-logout {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  background-color: #fef2f2;
+  color: #e7000b;
+  font-size: 0.875rem;
+  transition: all var(--transition-fast);
+}
+
+.sidebar-logout:hover {
+  background-color: #ffe2e2;
+  color: #e7000b;
+}
+
 .sidebar-link.active {
   background-color: rgba(30, 64, 175, 0.05);
   color: var(--primary);
@@ -1665,12 +1683,6 @@ button {
 
 .chart-card.wide {
   grid-column: 1 / -1;
-}
-
-@media (min-width: 1200px) {
-  .chart-card.wide {
-    grid-column: auto;
-  }
 }
 
 .chart-card-header {
@@ -2047,4 +2059,126 @@ button {
   0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
   33% { transform: translate(-10%, 15%) scale(1.15) rotate(-5deg); }
   66% { transform: translate(15%, -10%) scale(0.85) rotate(5deg); }
+}
+
+/* ===== PIE CHART LAYOUT ===== */
+.pie-chart-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.pie-canvas-wrap {
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 1 / 1;
+  height: auto;
+  align-self: center;
+}
+
+.pie-canvas-wrap canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.pie-legend-list {
+  flex: 1 1 300px;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+  align-content: start;
+}
+
+.pie-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: rgba(137, 152, 109, 0.06);
+  border: 1px solid var(--border-light);
+  transition: background 0.15s;
+}
+
+.pie-legend-item:hover {
+  background: rgba(137, 152, 109, 0.14);
+}
+
+.pie-legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.pie-legend-name {
+  flex: 1;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pie-legend-score {
+  font-size: 0.82rem;
+  font-weight: 800;
+  font-family: var(--font-display);
+  color: var(--text-main);
+  min-width: 28px;
+  text-align: right;
+}
+
+.pie-legend-pct {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  min-width: 38px;
+  text-align: right;
+}
+#leaderboard-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.lb-row {
+  cursor: default;
+}
+
+/* Pie chart card */
+#chart-card-pie {
+  display: flex;
+  flex-direction: column;
+}
+
+#chart-card-pie .pie-chart-layout {
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* Two-column charts row: side by side on desktop, stacked on mobile */
+.charts-row-2col {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 900px) {
+  .charts-row-2col {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Make bar + pie row use 3:2 ratio on wide screens */
+@media (min-width: 1200px) {
+  #chart-card-bar {
+    grid-column: auto;
+  }
 }
