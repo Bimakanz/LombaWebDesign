@@ -9,6 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <!-- tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
 <body class="dashboard-page">
@@ -95,7 +97,7 @@
 
     <nav class="sidebar-nav">
       <p class="nav-section-label">LAINNYA</p>
-      <a href="index.html" class="group bg-red-100 flex items-center gap-2 p-2 rounded-lg hover:bg-red-200 sidebar-logout transition-colors" id="nav-back-home">
+      <a href="index.html" class="group bg-red-100 flex items-center gap-2 p-2 rounded-lg hover:bg-red-200 sidebar-logout transition-colors hover:bg-red-200" id="nav-back-home">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" 
             stroke="currentColor" 
             class="text-red-600 group-hover:text-red-700 transition-colors" 
@@ -189,23 +191,26 @@
         </div>
       </div>
 
-      <!-- Charts Row -->
-      <div class="charts-row">
-        <!-- Bar Chart -->
-        <div class="chart-card wide" id="chart-card-bar">
+      <!-- Distribusi Nilai Mapel — full width -->
+      <div class="charts-row" style="margin-bottom:1.5rem;">
+        <div class="chart-card wide" id="chart-card-pie">
           <div class="chart-card-header">
             <div>
-              <h3 class="chart-title">Nilai per Mata Pelajaran</h3>
-              <p class="chart-sub">Semester Berjalan (Kelas 11 S2)</p>
+              <h3 class="chart-title">Distribusi Nilai Mapel</h3>
+              <p class="chart-sub">Proporsi seluruh mata pelajaran semester berjalan</p>
             </div>
-            <div class="chart-legend" id="bar-legend"></div>
           </div>
-          <div class="chart-wrapper">
-            <canvas id="barChart" aria-label="Bar chart nilai per mata pelajaran"></canvas>
+          <div class="pie-chart-layout">
+            <div class="pie-canvas-wrap">
+              <canvas id="pieChart" aria-label="Pie chart distribusi nilai semua mata pelajaran"></canvas>
+            </div>
+            <div class="pie-legend-list" id="pie-legend-list"></div>
           </div>
         </div>
+      </div>
 
-        <!-- Line Chart -->
+      <!-- Tren Perkembangan Nilai — full width -->
+      <div class="charts-row" style="margin-bottom:1.5rem;">
         <div class="chart-card wide" id="chart-card-line">
           <div class="chart-card-header">
             <div>
@@ -213,25 +218,26 @@
               <p class="chart-sub">Kelas 10 S1 — Kelas 11 S2</p>
             </div>
           </div>
-          <div class="chart-wrapper">
+          <div class="chart-wrapper" style="min-height:320px;">
             <canvas id="lineChart" aria-label="Line chart tren rata-rata nilai per semester"></canvas>
           </div>
         </div>
       </div>
 
-      <!-- Radar / Summary Table -->
+      <!-- Leaderboard Top 5 + Summary Table -->
       <div class="charts-row">
-        <div class="chart-card" id="chart-card-radar">
+        <!-- Leaderboard -->
+        <div class="chart-card" id="chart-card-leaderboard">
           <div class="chart-card-header">
             <div>
-              <h3 class="chart-title">Profil Kemampuan Utama</h3>
-              <p class="chart-sub">Distribusi kekuatan & kompetensi akademik</p>
+              <h3 class="chart-title">🏆 Top 5 Mata Pelajaran Terkuasai</h3>
+              <p class="chart-sub">Berdasarkan nilai tertinggi siswa</p>
             </div>
           </div>
-          <div class="chart-wrapper">
-            <canvas id="radarChart" aria-label="Radar chart profil kemampuan"></canvas>
-          </div>
+          <div id="leaderboard-list"></div>
         </div>
+
+        <!-- Summary Table -->
         <div class="chart-card" id="summary-table-card">
           <div class="chart-card-header">
             <h3 class="chart-title">Rekap Nilai Semester</h3>
@@ -273,7 +279,48 @@
     <section class="dash-section" id="section-trend">
       <h2 class="section-page-title">Tren Perkembangan Semester</h2>
       <p class="section-page-sub">Perkembangan rata-rata nilai Bima Sena dari Kelas 10 S1 hingga Kelas 11 S2.</p>
-      <div class="insight-cards" style="grid-template-columns: repeat(auto-fit, minmax(200px,1fr));" id="trend-cards"></div>
+      <div class="insight-cards" style="grid-template-columns: repeat(auto-fit, minmax(200px,1fr));" id="trend-cards">
+        <div class="insight-card blue">
+          <div class="icard-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+          </div>
+          <div class="icard-content">
+            <span class="icard-label">Semester Terbaik</span>
+            <span class="icard-value">Kelas 11 S2</span>
+            <span class="icard-sub">Rata-rata 90.0</span>
+          </div>
+        </div>
+        <div class="insight-card green">
+          <div class="icard-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+          </div>
+          <div class="icard-content">
+            <span class="icard-label">Status Tren</span>
+            <span class="icard-value">Positif</span>
+            <span class="icard-sub">Cenderung Naik</span>
+          </div>
+        </div>
+        <div class="insight-card purple">
+          <div class="icard-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          </div>
+          <div class="icard-content">
+            <span class="icard-label">Lonjakan Tertinggi</span>
+            <span class="icard-value">+6.0 Poin</span>
+            <span class="icard-sub">Kls 11 S1 ➔ S2</span>
+          </div>
+        </div>
+        <div class="insight-card red">
+          <div class="icard-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div class="icard-content">
+            <span class="icard-label">Rata-rata Keseluruhan</span>
+            <span class="icard-value">85.5</span>
+            <span class="icard-sub">Dari 4 Semester</span>
+          </div>
+        </div>
+      </div>
       <div class="chart-card" style="margin-top:1.5rem;" id="trend-chart-card">
         <div class="chart-card-header">
           <h3 class="chart-title">Grafik Tren Rata-rata Nilai</h3>
