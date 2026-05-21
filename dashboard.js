@@ -6,21 +6,20 @@ const studentsDB = {
     kelas: "Kelas 11 — IPA",
     inisial: "BS",
     perkembangan_semester: [
-      { semester: "Kelas 10 S1", rata_rata: 82 },
-      { semester: "Kelas 10 S2", rata_rata: 86 },
-      { semester: "Kelas 11 S1", rata_rata: 84 },
-      { semester: "Kelas 11 S2", rata_rata: 90 }
+      { semester: "Kelas 10 S1", rata_rata: 78 },
+      { semester: "Kelas 10 S2", rata_rata: 83 },
+      { semester: "Kelas 11 S1", rata_rata: 88 },
+      { semester: "Kelas 11 S2", rata_rata: 94 }
     ],
     detail_nilai: [
-      { mapel: "Matematika", nilai: 90 },
-      { mapel: "B. Indonesia", nilai: 85 },
-      { mapel: "B. Inggris", nilai: 78 },
+      { mapel: "Matematika", nilai: 98 },
+      { mapel: "B. Indonesia", nilai: 88 },
+      { mapel: "B. Inggris", nilai: 65 }, 
       { mapel: "PAI", nilai: 92 },
-      { mapel: "Tahfidz", nilai: 88 },
-      { mapel: "PKK", nilai: 80 },
-      { mapel: "PKN", nilai: 85 },
-      { mapel: "PJOK", nilai: 95 },
-      { mapel: "Informatika", nilai: 95 }
+      { mapel: "Tahfidz", nilai: 85 },
+      { mapel: "PKN", nilai: 74 },          
+      { mapel: "PJOK", nilai: 90 },
+      { mapel: "Informatika", nilai: 80 }
     ]
   },
   "242510023": {
@@ -28,21 +27,20 @@ const studentsDB = {
     kelas: "Kelas 11 — IPS",
     inisial: "AH",
     perkembangan_semester: [
-      { semester: "Kelas 10 S1", rata_rata: 78 },
-      { semester: "Kelas 10 S2", rata_rata: 80 },
-      { semester: "Kelas 11 S1", rata_rata: 85 },
-      { semester: "Kelas 11 S2", rata_rata: 88 }
+      { semester: "Kelas 10 S1", rata_rata: 85 }, 
+      { semester: "Kelas 10 S2", rata_rata: 78 }, 
+      { semester: "Kelas 11 S1", rata_rata: 88 },
+      { semester: "Kelas 11 S2", rata_rata: 82 }  
     ],
     detail_nilai: [
-      { mapel: "Matematika", nilai: 82 },
-      { mapel: "B. Indonesia", nilai: 88 },
-      { mapel: "B. Inggris", nilai: 85 },
-      { mapel: "PAI", nilai: 90 },
-      { mapel: "Tahfidz", nilai: 85 },
-      { mapel: "PKK", nilai: 88 },
-      { mapel: "PKN", nilai: 90 },
-      { mapel: "PJOK", nilai: 86 },
-      { mapel: "Informatika", nilai: 84 }
+      { mapel: "Matematika", nilai: 95 },   
+      { mapel: "B. Indonesia", nilai: 68 },  
+      { mapel: "B. Inggris", nilai: 88 },    
+      { mapel: "PAI", nilai: 72 },           
+      { mapel: "Tahfidz", nilai: 90 },       
+      { mapel: "PKN", nilai: 65 },           
+      { mapel: "PJOK", nilai: 84 },          
+      { mapel: "Informatika", nilai: 76 }    
     ]
   }
 };
@@ -122,7 +120,6 @@ document.addEventListener('DOMContentLoaded', () => {
     renderReportSection();
     
     // Render Charts
-    renderLineChart();
     renderPieChart();
     renderLeaderboard();
     renderGradesBarChart();
