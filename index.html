@@ -13,19 +13,16 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="logo.png" />
 </head>
 
 <body>
-
   <!-- ===== NAVBAR ===== -->
   <header class="navbar" id="navbar">
     <div class="nav-container">
       <a href="index.html" class="nav-logo" id="nav-logo-link">
         <div class="logo-icon">
-          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-            <path d="M14 2L4 7v7c0 6.1 4.3 11.8 10 13 5.7-1.2 10-6.9 10-13V7L14 2z" fill="var(--primary)" />
-            <path d="M9 14l3 3 7-7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
+          <img src="logo.png" alt="Cognitia Logo" style="width: 72px; height: 72px; object-fit: contain;" />
         </div>
         <span class="logo-text">Cognitia</span>
       </a>
@@ -34,22 +31,6 @@
         <a href="#cara-kerja" class="nav-link">Cara Kerja</a>
         <a href="#tentang" class="nav-link">Tentang</a>
         <button class="nav-cta-btn" id="nav-contact-btn">Hubungi Wali Guru</button>
-        <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle Dark Mode">
-          <svg id="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-          </svg>
-          <svg id="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
-            <circle cx="12" cy="12" r="5"></circle>
-            <line x1="12" y1="1" x2="12" y2="3"></line>
-            <line x1="12" y1="21" x2="12" y2="23"></line>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-            <line x1="1" y1="12" x2="3" y2="12"></line>
-            <line x1="21" y1="12" x2="23" y2="12"></line>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-          </svg>
-        </button>
       </nav>
       <button class="hamburger" id="hamburger" aria-label="Toggle menu">
         <span></span><span></span><span></span>
@@ -90,10 +71,6 @@
       </p>
       <div class="hero-actions">
         <a href=".vscode/Login.html" class="btn-primary" id="hero-cta-btn">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M2 12C2 12 5 5 12 5C19 5 22 12 22 12C22 12 19 19 12 19C5 19 2 12 2 12Z" />
-            <circle cx="12" cy="12" r="3" />
-          </svg>
           Pantau Ananda
         </a>
         <a href="#cara-kerja" class="btn-secondary" id="hero-learn-btn">
@@ -199,7 +176,7 @@
             </svg>
           </div>
           <h3>Tren Perkembangan</h3>
-          <p>Lihat grafik perkembangan rata-rata nilai dari Kelas 10 hingga Kelas 11 secara visual dan kronologis.</p>
+          <p>Lihat grafik perkembangan rata-rata nilai dari Kelas 10 hingga Kelas 11 secara visual and kronologis.</p>
         </div>
         <div class="feature-card" id="feat-card-3">
           <div class="feature-icon purple">
@@ -411,15 +388,12 @@
       <div class="footer-brand">
         <div class="nav-logo" style="margin-bottom:0.75rem;">
           <div class="logo-icon">
-            <svg width="24" height="24" viewBox="0 0 28 28" fill="none">
-              <path d="M14 2L4 7v7c0 6.1 4.3 11.8 10 13 5.7-1.2 10-6.9 10-13V7L14 2z" fill="var(--primary)" />
-              <path d="M9 14l3 3 7-7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
+            <img src="logo.png" alt="Cognitia Logo" style="width: 60px; height: 60px; object-fit: contain;" />
           </div>
           <span class="logo-text">Cognitia</span>
         </div>
         <p class="footer-tagline">Platform monitoring akademik terpercaya untuk orang tua dan wali murid.</p>
-      </div>
+      </div></div>
       <div class="footer-links">
         <h4>Navigasi</h4>
         <a href="#fitur">Fitur</a>
@@ -435,7 +409,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2025 Cognitia. Dibuat dengan ❤️ untuk pendidikan Indonesia.</p>
+      <p>&copy; 2025 Cognitia. Dibuat untuk membantu pendidikan Indonesia.</p>
     </div>
   </footer>
 
