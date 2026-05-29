@@ -218,24 +218,73 @@ function renderDashboardCharts(stats) {
     }
   });
 
-  // Pie Chart
+  // Pie Chart (matching dashboard.html style)
   const pieCtx = document.getElementById('teacherPieChart').getContext('2d');
-  const sortedSubjects = subjects.map(s => ({ name: s, avg: parseFloat(stats.subjectAverages[s]) }))
-    .sort((a, b) => b.avg - a.avg).slice(0, 4);
+  const pieData = subjects.map((s, i) => ({
+    name: s,
+    avg: parseFloat(stats.subjectAverages[s]),
+    color: mapelColors[i % mapelColors.length]
+  }));
+
+  // Build custom legend
+  const legendEl = document.getElementById('teacher-pie-legend-list');
+  if (legendEl) {
+    legendEl.innerHTML = '';
+    const total = pieData.reduce((sum, d) => sum + d.avg, 0);
+    pieData.forEach(d => {
+      const pct = ((d.avg / total) * 100).toFixed(1);
+      const item = document.createElement('div');
+      item.className = 'pie-legend-item';
+      item.innerHTML = `
+        <span class="pie-legend-dot" style="background:${d.color};"></span>
+        <span class="pie-legend-name">${d.name}</span>
+        <span class="pie-legend-score">${d.avg}</span>
+        <span class="pie-legend-pct">${pct}%</span>
+      `;
+      legendEl.appendChild(item);
+    });
+  }
 
   new Chart(pieCtx, {
     type: 'pie',
     data: {
-      labels: sortedSubjects.map(s => s.name),
+      labels: pieData.map(d => d.name),
       datasets: [{
-        data: sortedSubjects.map(s => s.avg),
-        backgroundColor: [colors.primary, colors.orange, colors.teal, colors.purple]
+        label: 'Rata-rata',
+        data: pieData.map(d => d.avg),
+        backgroundColor: pieData.map(d => d.color),
+        borderWidth: 2,
+        borderColor: '#FFFDF5',
+        hoverOffset: 10
       }]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      plugins: { legend: { position: 'bottom' } }
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          enabled: true,
+          backgroundColor: 'rgba(45, 56, 32, 0.97)',
+          titleColor: '#FFFDF5',
+          bodyColor: '#C5D89D',
+          borderColor: '#89986D',
+          borderWidth: 1,
+          padding: 12,
+          cornerRadius: 8,
+          displayColors: true,
+          callbacks: {
+            title: function(items) {
+              return items[0].label;
+            },
+            label: function(context) {
+              const total = context.dataset.data.reduce((a, b) => a + b, 0);
+              const pct = ((context.raw / total) * 100).toFixed(1);
+              return `  Rata-rata: ${context.raw}  (${pct}%)`;
+            }
+          }
+        }
+      }
     }
   });
 }
