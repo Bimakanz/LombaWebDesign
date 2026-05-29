@@ -12,8 +12,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     
     <!-- Link to global Stylesheet to inherit all custom CSS variables & Theme states -->
-    <link rel="stylesheet" href="../style.css" />
-    <link rel="icon" type="image/png" href="../logo.png" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/png" href="logo.png" />
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -32,6 +32,12 @@
     </script>
 
     <style>
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
         /* Keep specific complex keyframe animations & backgrounds for maximum compatibility */
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
@@ -47,76 +53,58 @@
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background-image: linear-gradient(rgba(246, 240, 215, 0.03) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(246, 240, 215, 0.03) 1px, transparent 1px);
+            background-image: linear-gradient(rgba(102, 184, 212, 0.05) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(102, 184, 212, 0.05) 1px, transparent 1px);
             background-size: 30px 30px;
             z-index: 1;
         }
     </style>
 </head>
 
-<body class="flex min-h-screen bg-[var(--bg-body)] overflow-x-hidden m-0 font-sans transition-colors duration-200">
+<body class="flex h-[100dvh] bg-[var(--bg-body)] overflow-hidden m-0 font-sans transition-colors duration-200">
 
-    <div class="flex w-full min-h-screen">
-        <!-- ===== LEFT PANEL: Forest Olive Premium Thematic Block ===== -->
-        <div class="hidden lg:flex flex-[1.1] bg-[#2D3820] text-[#F6F0D7] p-14 flex-col justify-between relative overflow-hidden login-grid-bg">
+    <div class="flex w-full h-full overflow-hidden">
+        <!-- ===== LEFT PANEL: Premium Dark Slate & Blue Thematic Block ===== -->
+        <div class="hidden lg:flex flex-[1.1] bg-[#0f172a] text-[#f4f9fc] p-10 xl:p-14 flex-col justify-between relative overflow-hidden login-grid-bg">
             <!-- Top Brand Logo -->
-            <a href="../index.html" class="flex items-center gap-4 font-display font-extrabold text-[1.75rem] text-[#F6F0D7] no-underline z-10 w-fit">
-                <div class="bg-[rgba(246,240,215,0.1)] border border-[rgba(246,240,215,0.2)] p-1.5 rounded-[var(--radius-md)] flex items-center justify-center">
-                    <img src="../logo.png" alt="Cognitia Logo" class="w-10 h-10 object-contain" />
-                </div>
+            <a href="index.html" class="flex items-center gap-4 font-display font-extrabold text-[1.75rem] text-[#f4f9fc] no-underline z-10 w-fit">
                 <span>Cognitia</span>
             </a>
 
-            <!-- Middle Content -->
-            <div class="relative z-10 my-auto flex flex-col gap-10">
-                <div class="inline-flex items-center gap-2 bg-[rgba(197,216,157,0.12)] border border-[rgba(197,216,157,0.2)] text-[#C5D89D] px-4 py-2 rounded-full text-[0.825rem] font-semibold tracking-[0.05em] uppercase w-fit">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-                    </svg>
-                     Pantau Perkembangan Ananda
-                </div>
-                <h1 class="font-display text-[2rem] xl:text-[3.25rem] font-extrabold leading-[1.25] tracking-[-0.02em] text-[#FFFDF5]">
-                    Raih prestasi terbaik <em class="italic text-[#C5D89D] font-bold not-italic">ananda</em> bersama kami
+            <!-- Middle Content (Moved closer to top and enlarged text) -->
+            <div class="relative z-10 mt-5 xl:mt-7 mb-auto flex flex-col gap-5">
+                <h1 class="font-display text-[3.25rem] xl:text-[4.85rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-[#ffffff]">
+                    Raih prestasi terbaik <em class="italic text-[#66B8D4] font-bold not-italic">ananda</em> bersama kami
                 </h1>
-                <p class="text-[1.125rem] text-[#D8D0B4] leading-[1.6] max-w-[480px]">
+                <p class="text-[1.45rem] xl:text-[1.75rem] text-[#94a3b8] leading-[1.5] max-w-[580px]">
                     Lihat nilai, rapor, dan pencapaian siswa secara real-time kapan saja dan di mana saja.
                 </p>
             </div>
 
-            <!-- Bottom Stats Row (Elevated based on layout requirements) -->
-            <div class="flex gap-14 relative z-10 border-b border-[rgba(246,240,215,0.15)] pb-8 mb-20">
+            <!-- Bottom Stats Row -->
+            <div class="flex gap-14 relative z-10 border-b border-[rgba(102,184,212,0.15)] pb-6 mb-4 xl:mb-8">
                 <div class="flex flex-col gap-1">
-                    <span class="font-display text-[1.75rem] font-extrabold text-[#FFFDF5]">1.2K+</span>
-                    <span class="text-[1.3rem] text-[#B5B99A] font-medium">Siswa Aktif</span>
+                    <span class="font-display text-[1.75rem] font-extrabold text-[#ffffff]">1.2K+</span>
+                    <span class="text-[1.3rem] text-[#94a3b8] font-medium">Siswa Aktif</span>
                 </div>
                 <div class="flex flex-col gap-1">
-                    <span class="font-display text-[1.75rem] font-extrabold text-[#FFFDF5]">48</span>
-                    <span class="text-[1.3rem] text-[#B5B99A] font-medium">Pengajar</span>
+                    <span class="font-display text-[1.75rem] font-extrabold text-[#ffffff]">48</span>
+                    <span class="text-[1.3rem] text-[#94a3b8] font-medium">Pengajar</span>
                 </div>
                 <div class="flex flex-col gap-1">
-                    <span class="font-display text-[1.75rem] font-extrabold text-[#FFFDF5]">12</span>
-                    <span class="text-[1.3rem] text-[#B5B99A] font-medium">Mata Pelajaran</span>
+                    <span class="font-display text-[1.75rem] font-extrabold text-[#ffffff]">12</span>
+                    <span class="text-[1.3rem] text-[#94a3b8] font-medium">Mata Pelajaran</span>
                 </div>
             </div>
         </div>
 
         <!-- ===== RIGHT PANEL: Cream / Dark surface input card ===== -->
-        <div class="flex-1 lg:flex-none lg:w-[45%] bg-[var(--bg-surface)] p-8 lg:p-16 flex flex-col justify-center relative transition-colors duration-200">
-            <div class="max-w-[420px] w-full mx-auto flex flex-col gap-8">
-                <!-- Brand logo for the Right Panel (Visible on all screens above the NIS search bar input card) -->
-                <div class="flex items-center gap-4">
-                    <div class="bg-[rgba(137,152,109,0.1)] border border-[var(--border-light)] p-2 rounded-[var(--radius-lg)] flex items-center justify-center shadow-sm">
-                        <img src="../logo.png" alt="Cognitia Logo" class="w-12 h-12 object-contain" />
-                    </div>
-                    <div class="flex flex-col">
-                        <span class="font-display font-extrabold text-[2.25rem] text-[var(--text-dark)] leading-none tracking-tight">Cognitia</span>
-                        <span class="text-[0.875rem] text-[var(--text-muted)] mt-1.5 font-medium tracking-wide">Portal Akademik</span>
-                    </div>
-                </div>
+        <div class="flex-1 lg:flex-none lg:w-[45%] bg-[var(--bg-surface)] p-6 lg:p-10 xl:p-14 flex flex-col justify-center relative transition-colors duration-200">
+                <div class="max-w-[420px] w-full mx-auto flex flex-col gap-6 lg:gap-7">
+                    <!-- Brand logo for the Right Panel (Visible on all screens above the NIS search bar input card) -->
 
                 <!-- Header -->
-                <div class="flex flex-col gap-3">
+                <div class="flex flex-col gap-2.5">
                     <div class="inline-flex items-center gap-1.5 text-[var(--primary)] text-[0.825rem] font-bold tracking-[0.05em]">
                         ORANG TUA / WALI
                     </div>
@@ -247,7 +235,7 @@
                     
                     // Delay redirect for simulated secure database fetch animation
                     setTimeout(() => {
-                        window.location.href = '../dashboard.html';
+                        window.location.href = 'dashboard.html';
                     }, 1800);
                 } else {
                     // Trigger shake animation & error state
