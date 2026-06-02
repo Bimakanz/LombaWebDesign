@@ -3,7 +3,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Navbar Scroll Effect
   const navbar = document.getElementById('navbar');
-  
+
   window.addEventListener('scroll', () => {
     if (navbar) {
       if (window.scrollY > 50) {
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobile-menu');
   const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
-  
+
   function toggleMobileMenu() {
     if (mobileMenu) mobileMenu.classList.toggle('open');
     if (hamburger) hamburger.classList.toggle('open');
@@ -56,16 +56,16 @@ document.addEventListener('DOMContentLoaded', () => {
     anchor.addEventListener('click', function (e) {
       const targetId = this.getAttribute('href');
       if (targetId === '#') return;
-      
+
       const targetElement = document.querySelector(targetId);
       if (targetElement) {
         e.preventDefault();
-        
-        // Account for fixed navbar height
-        const headerOffset = 80;
+
+        // Account for fixed navbar height + extra breathing room
+        const headerOffset = 100;
         const elementPosition = targetElement.getBoundingClientRect().top;
         const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-  
+
         window.scrollTo({
           top: offsetPosition,
           behavior: 'smooth'
@@ -74,25 +74,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Simple Intersection Observer for Animations (Fade in on scroll)
-  const animateElements = document.querySelectorAll('.feature-card, .step-card, .about-text, .about-visual');
-  
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-
-  animateElements.forEach(el => {
-    // Initial state before animation
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
-    observer.observe(el);
+  // AOS - Animate On Scroll (library)
+  AOS.init({
+    duration: 700,
+    easing: 'ease-out',
+    once: true,
+    offset: 80
   });
 
   // Contact Modal Logic
@@ -202,16 +189,16 @@ document.addEventListener('DOMContentLoaded', () => {
   // Stats Count Up Animation
   const statsSection = document.querySelector('.stats-banner');
   const statNumbers = document.querySelectorAll('.stat-number');
-  
+
   if (statsSection && statNumbers.length > 0) {
     let animated = false;
-    
+
     const countUp = (element) => {
       const target = parseInt(element.getAttribute('data-target'), 10);
       const suffix = element.getAttribute('data-suffix') || '';
       const duration = 1500; // ms
       const startTime = performance.now();
-      
+
       const updateNumber = (currentTime) => {
         const elapsedTime = currentTime - startTime;
         if (elapsedTime >= duration) {
@@ -225,10 +212,10 @@ document.addEventListener('DOMContentLoaded', () => {
           requestAnimationFrame(updateNumber);
         }
       };
-      
+
       requestAnimationFrame(updateNumber);
     };
-    
+
     const statsObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting && !animated) {
@@ -238,7 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     }, { threshold: 0.2 });
-    
+
     statsObserver.observe(statsSection);
   }
 });

@@ -165,28 +165,28 @@ let pieChartInstance = null;
 let trendLineChartInstance = null;
 
 const colors = {
-  primary: "#6d9894",
-  primaryLight: "#84aba9",
-  secondary: "#9dc9d8",
-  secondaryLight: "#b1e3e4",
-  purple: "#7D6B91",
-  orange: "#D98A6C",
-  teal: "#6B8F71",
-  pink: "#C28CAE",
-  gray: "#D8D0B4",
-  textMuted: "#6B7A54",
+  primary: "#66B8D4",
+  primaryLight: "#8ecce0",
+  secondary: "#3a97b5",
+  secondaryLight: "#bde7f7",
+  purple: "#8b5cf6",
+  orange: "#f59e0b",
+  teal: "#10b981",
+  pink: "#ec4899",
+  gray: "#94a3b8",
+  textMuted: "#64748b",
 };
 
 const mapelColors = [
-  colors.primary,
-  colors.purple,
-  colors.teal,
-  colors.orange,
-  colors.pink,
-  "#7FA99B",
-  "#5F8D8A",
-  "#7EA4B3",
-  "#A2B59F",
+  "#66B8D4",
+  "#8b5cf6",
+  "#10b981",
+  "#f59e0b",
+  "#ec4899",
+  "#3a97b5",
+  "#06b6d4",
+  "#6366f1",
+  "#14b8a6",
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -464,7 +464,7 @@ function renderReportSection() {
         <span class="scard-title">${g.mapel}</span>
         <span class="scard-score">${g.nilai}</span>
       </div>
-      <p style="font-size:0.875rem; color:#6B7A54; margin-top:0.5rem;">${desc}</p>
+      <p class="scard-desc">${desc}</p>
     `;
     container.appendChild(card);
   });
@@ -481,13 +481,13 @@ function renderLeaderboard() {
   top3.forEach((g, idx) => {
     const medali = ["🥇", "🥈", "🥉"];
     const item = document.createElement("div");
-    item.className = "flex items-center justify-between p-2 mb-2 rounded bg-stone-50 border border-stone-100";
+    item.className = "lb-item";
     item.innerHTML = `
-      <div class="flex items-center gap-2">
-        <span class="text-lg">${medali[idx]}</span>
-        <span class="font-medium text-stone-700">${g.mapel}</span>
+      <div class="lb-left">
+        <span class="lb-medal">${medali[idx]}</span>
+        <span class="lb-mapel">${g.mapel}</span>
       </div>
-      <span class="font-bold text-teal-700">${g.nilai}</span>
+      <span class="lb-score">${g.nilai}</span>
     `;
     container.appendChild(item);
   });
@@ -495,7 +495,7 @@ function renderLeaderboard() {
 
 // --- CHART.JS CONFIGURATIONS ---
 Chart.defaults.font.family = "'Inter', sans-serif";
-Chart.defaults.color = "#6B7A54";
+Chart.defaults.color = "#64748b";
 
 function renderGradesBarChart() {
   const canvasEl = document.getElementById("gradesBarChart");
@@ -529,7 +529,7 @@ function renderGradesBarChart() {
       maintainAspectRatio: false,
       plugins: { legend: { display: false } },
       scales: {
-        y: { beginAtZero: true, max: 100, grid: { color: "rgba(137, 152, 109, 0.1)" } },
+        y: { beginAtZero: true, max: 100, grid: { color: "rgba(102, 184, 212, 0.1)" } },
         x: { grid: { display: false } },
       },
     },
@@ -572,7 +572,7 @@ function renderPieChart() {
     type: "pie",
     data: {
       labels: labels,
-      datasets: [{ data: data, backgroundColor: mapelColors, borderWidth: 2, borderColor: "#FFFDF5" }],
+      datasets: [{ data: data, backgroundColor: mapelColors, borderWidth: 2, borderColor: "#ffffff" }],
     },
     options: {
       responsive: true,
@@ -603,7 +603,7 @@ function renderTrendLineChart() {
           label: "Rata-rata",
           data: data,
           borderColor: colors.primary,
-          backgroundColor: "rgba(109, 152, 148, 0.1)",
+          backgroundColor: "rgba(102, 184, 212, 0.1)",
           borderWidth: 3,
           pointBackgroundColor: colors.primary,
           fill: true,
@@ -616,7 +616,7 @@ function renderTrendLineChart() {
       maintainAspectRatio: false,
       plugins: { legend: { display: false } },
       scales: { 
-        y: { min: 70, max: 100, grid: { color: "rgba(137, 152, 109, 0.1)" } },
+        y: { min: 70, max: 100, grid: { color: "rgba(102, 184, 212, 0.1)" } },
         x: { grid: { display: false } }
       },
     },

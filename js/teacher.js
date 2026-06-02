@@ -33,20 +33,20 @@ const studentsData = [
 const subjects = ["Matematika", "B. Indonesia", "B. Inggris", "PAI", "Tahfidz", "PKK", "PKN", "PJOK", "Informatika"];
 
 const colors = {
-  primary: '#3B82F6',
-  primaryLight: '#60A5FA',
-  secondary: '#93C5FD',
-  secondaryLight: '#DBEAFE',
-  purple: '#8B5CF6',
-  orange: '#F59E0B',
-  teal: '#10B981',
-  pink: '#EC4899',
-  gray: '#94A3B8',
-  textMuted: '#64748B',
-  accentRed: '#EF4444'
+  primary: '#66B8D4',
+  primaryLight: '#8ecce0',
+  secondary: '#3a97b5',
+  secondaryLight: '#bde7f7',
+  purple: '#8b5cf6',
+  orange: '#f59e0b',
+  teal: '#10b981',
+  pink: '#ec4899',
+  gray: '#94a3b8',
+  textMuted: '#64748b',
+  accentRed: '#ef4444'
 };
 
-const mapelColors = [colors.primary, colors.purple, colors.teal, colors.orange, colors.pink, colors.secondary, colors.primaryLight, colors.purple, colors.teal];
+const mapelColors = [colors.primary, colors.purple, colors.teal, colors.orange, colors.pink, colors.secondary, colors.primaryLight, '#6366f1', '#14b8a6'];
 
 let charts = {}; // Store chart instances
 
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize UI
   setupSidebar();
   setupNavigation();
-  
+
   // Calculate and Render
   const classStats = calculateClassStats();
   renderDashboardInsights(classStats);
@@ -121,7 +121,7 @@ function setupNavigation() {
     link.addEventListener('click', (e) => {
       e.preventDefault();
       const target = link.getAttribute('data-section');
-      
+
       sections.forEach(s => s.classList.remove('active'));
       document.getElementById('section-' + target).classList.add('active');
 
@@ -203,7 +203,7 @@ function renderDashboardCharts(stats) {
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      plugins: { 
+      plugins: {
         legend: { display: false },
         tooltip: {
           backgroundColor: 'rgba(30, 41, 59, 0.95)',
@@ -214,9 +214,9 @@ function renderDashboardCharts(stats) {
           displayColors: false
         }
       },
-      scales: { 
-        y: { 
-          beginAtZero: true, 
+      scales: {
+        y: {
+          beginAtZero: true,
           max: 100,
           grid: { color: '#F1F5F9', drawBorder: false },
           ticks: { font: { family: 'Plus Jakarta Sans', size: 11 }, color: '#94A3B8' }
@@ -255,7 +255,7 @@ function renderDashboardCharts(stats) {
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      plugins: { 
+      plugins: {
         legend: { display: false },
         tooltip: {
           backgroundColor: 'rgba(30, 41, 59, 0.95)',
@@ -266,9 +266,9 @@ function renderDashboardCharts(stats) {
           displayColors: false
         }
       },
-      scales: { 
-        y: { 
-          min: 70, 
+      scales: {
+        y: {
+          min: 70,
           max: 100,
           grid: { color: '#F1F5F9', drawBorder: false },
           ticks: { font: { family: 'Plus Jakarta Sans', size: 11 }, color: '#94A3B8' }
@@ -330,17 +330,17 @@ function renderDashboardCharts(stats) {
           enabled: true,
           backgroundColor: 'rgba(30, 41, 59, 0.97)',
           titleColor: '#FFFFFF',
-          bodyColor: '#93C5FD',
-          borderColor: '#3B82F6',
+          bodyColor: '#bde7f7',
+          borderColor: '#66B8D4',
           borderWidth: 1,
           padding: 12,
           cornerRadius: 8,
           displayColors: true,
           callbacks: {
-            title: function(items) {
+            title: function (items) {
               return items[0].label;
             },
-            label: function(context) {
+            label: function (context) {
               const total = context.dataset.data.reduce((a, b) => a + b, 0);
               const pct = ((context.raw / total) * 100).toFixed(1);
               return `  Rata-rata: ${context.raw}  (${pct}%)`;
@@ -356,7 +356,7 @@ function renderSummaryTable() {
   const stats = calculateClassStats();
   const tbody = document.getElementById('summary-table-body');
   const semesters = ["Semester 1 (Ganjil)", "Semester 2 (Genap)", "Semester 3 (Ganjil)", "Semester 4 (Genap)"];
-  
+
   stats.semesterAverages.forEach((avg, i) => {
     const tr = document.createElement('tr');
     let badgeClass = avg >= 85 ? 'excellent' : 'good';
@@ -443,7 +443,7 @@ function renderDetailBarChart(student) {
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      plugins: { 
+      plugins: {
         legend: { display: false },
         tooltip: {
           backgroundColor: 'rgba(30, 41, 59, 0.95)',
@@ -454,9 +454,9 @@ function renderDetailBarChart(student) {
           displayColors: false
         }
       },
-      scales: { 
-        y: { 
-          beginAtZero: true, 
+      scales: {
+        y: {
+          beginAtZero: true,
           max: 100,
           grid: { color: '#F1F5F9', drawBorder: false },
           ticks: { font: { family: 'Plus Jakarta Sans', size: 11 }, color: '#94A3B8' }
@@ -504,7 +504,7 @@ function renderDetailReports(student) {
         <span class="scard-title">${s}</span>
         <span class="scard-score">${score}</span>
       </div>
-      <p style="font-size:0.875rem; color:#64748B; margin-top:0.5rem;">${desc}</p>
+      <p class="scard-desc">${desc}</p>
     `;
     grid.appendChild(card);
   });
@@ -522,7 +522,7 @@ function renderRanking() {
   const top5 = rankedStudents.slice(0, 5);
   // Reorder for podium visual: 4, 2, 1, 3, 5
   const visualTop5 = [top5[3], top5[1], top5[0], top5[2], top5[4]];
-  
+
   podiumContainer.innerHTML = visualTop5.map((s, i) => {
     const rank = rankedStudents.indexOf(s) + 1;
     const heights = { 1: '80%', 2: '70%', 3: '60%', 4: '50%', 5: '40%' };

@@ -12,7 +12,9 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <!-- AOS - Animate On Scroll -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
   <style>
     :root {
       /* Theme: White & Blue #66B8D4 */
@@ -62,6 +64,7 @@
       color: #66B8D4;
       background: linear-gradient(135deg, #3a97b5 0%, #66B8D4 100%);
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
@@ -69,6 +72,7 @@
       color: #66B8D4;
       background: linear-gradient(135deg, #3a97b5 0%, #66B8D4 100%);
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
@@ -187,10 +191,10 @@
     }
 
     .hero-visual {
-      width: fit-content;
-      max-width: 100%;
-      position: relative;
-      margin: 4rem auto 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     @media (min-width: 992px) {
@@ -215,15 +219,16 @@
       .hero-visual {
         margin-top: 0;
         padding: 0;
-        margin-left: auto;
-        margin-right: 0;
+        justify-content: flex-end;
       }
     }
 
     /* Stats Divider Banner */
     .stats-banner {
-      background-color: var(--primary); /* Sky Blue */
-      color: var(--text-inverse); /* White */
+      background-color: var(--primary);
+      /* Sky Blue */
+      color: var(--text-inverse);
+      /* White */
       padding: 2.5rem 0;
       width: 100%;
       box-shadow: var(--shadow-sm);
@@ -253,19 +258,19 @@
     }
 
     .stat-number {
-      font-size: clamp(2.25rem, 5vw, 3.25rem); /* Extra large bold numbers */
+      font-size: clamp(2.25rem, 5vw, 3.25rem);
+      /* Extra large bold numbers */
       font-weight: 900;
       line-height: 1;
       letter-spacing: -0.02em;
     }
 
     .stat-label {
-      font-size: clamp(0.6rem, 1.1vw, 0.725rem);
+      font-size: clamp(0.75rem, 1.5vw, 0.875rem);
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.05em;
       opacity: 0.9;
-      white-space: nowrap;
     }
 
     @media (max-width: 767px) {
@@ -279,14 +284,21 @@
     .features-section {
       background-color: #ffffff !important;
     }
+
     .features-section .feature-card {
       background-color: #f4f9fc !important;
       border-color: #e2e8f0 !important;
     }
-    
+
+    .features-section .feature-card:hover {
+      background-color: #ffffff !important;
+      border-color: var(--primary) !important;
+    }
+
     .howto-section {
       background-color: #f4f9fc !important;
     }
+
     .howto-section .step-card {
       background-color: #ffffff !important;
       border-color: #e2e8f0 !important;
@@ -298,36 +310,39 @@
       grid-template-columns: repeat(2, 1fr) !important;
       gap: 2.5rem !important;
     }
-    
+
     .step-connector {
-      display: none !important; /* Hide connectors to allow wide 2x2 grid cards */
+      display: none !important;
+      /* Hide connectors to allow wide 2x2 grid cards */
     }
-    
+
     .step-card {
       width: 100% !important;
       flex: none !important;
       padding: 2.5rem !important;
     }
-    
+
     @media (max-width: 767px) {
       .steps-container {
         grid-template-columns: 1fr !important;
         gap: 1.5rem !important;
       }
     }
-    
+
     .about-section {
       background-color: #ffffff !important;
     }
-    
+
     .cta-section {
       background-color: #f4f9fc !important;
     }
 
     /* ===== FOOTER STYLING ===== */
     .footer {
-      background-color: #0f172a; /* Premium deep slate background */
-      color: #94a3b8; /* Soft readable slate text */
+      background-color: #0f172a;
+      /* Premium deep slate background */
+      color: #94a3b8;
+      /* Soft readable slate text */
       padding: 5rem 0 2rem;
       border-top: 1px solid #1e293b;
     }
@@ -354,7 +369,7 @@
       gap: 0.75rem;
       text-decoration: none;
     }
-    
+
     .footer-brand .logo-text {
       color: #ffffff !important;
     }
@@ -368,7 +383,7 @@
     .footer-links {
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      gap: 1rem;
     }
 
     .footer-links h4 {
@@ -378,7 +393,7 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.5rem;
     }
 
     .footer-links a {
@@ -390,7 +405,8 @@
     }
 
     .footer-links a:hover {
-      color: var(--primary); /* Hover color: Cognitia blue accent */
+      color: var(--primary);
+      /* Hover color: Cognitia blue accent */
     }
 
     .footer-bottom {
@@ -536,6 +552,7 @@
         margin: 0 auto 3rem;
         gap: 1rem;
       }
+
       .hero-actions .btn-primary,
       .hero-actions .btn-secondary {
         width: 100%;
@@ -544,7 +561,9 @@
       }
     }
   </style>
-  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="icon" type="image/png" href="assets/images/logo.png" />
+  <!-- AOS JS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 </head>
 
 <body>
@@ -571,8 +590,7 @@
       <a href="#fitur" class="mobile-link">Fitur</a>
       <a href="#cara-kerja" class="mobile-link">Cara Kerja</a>
       <a href="#tentang" class="mobile-link">Tentang</a>
-      <a href="Login.html" class="btn-primary mobile-cta-btn">Pantau Ananda</a>
-      <button class="nav-cta-btn" id="mobile-contact-btn">Hubungi Wali Guru</button>
+      <a href="pages/login.html" class="mobile-cta-btn">Pantau Ananda</a>
     </div>
   </header>
 
@@ -595,7 +613,7 @@
         Visualisasikan nilai, lacak tren, dan tetap terhubung dengan perkembangan belajar anak Anda.
       </p>
       <div class="hero-actions">
-        <a href="Login.html" class="btn-primary" id="hero-cta-btn">
+        <a href="pages/login.html" class="btn-primary" id="hero-cta-btn">
           Pantau Ananda
         </a>
         <a href="#cara-kerja" class="btn-secondary" id="hero-learn-btn">
@@ -608,7 +626,7 @@
 
     </div>
     <div class="hero-visual">
-      <img src="hero_vector.png" alt="Pantau Perkembangan Akademik Ananda" class="hero-illustration-img" />
+      <img src="assets/images/hero_vector.png" alt="Pantau Perkembangan Akademik Ananda" class="hero-illustration-img" />
       <div class="floating-badge badge-1">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
@@ -651,13 +669,13 @@
   <!-- ===== FITUR SECTION ===== -->
   <section class="features-section" id="fitur">
     <div class="section-container">
-      <div class="section-header">
+      <div class="section-header" data-aos="fade-up">
         <h2 class="section-title">Semua yang Anda Butuhkan untuk<br /><span class="gradient-text">Memantau Perkembangan
             Anak</span></h2>
         <p class="section-desc">Cognitia menyajikan informasi akademik dalam format yang mudah dipahami dan menarik.</p>
       </div>
       <div class="features-grid-3">
-        <div class="feature-card" id="feat-card-1">
+        <div class="feature-card" id="feat-card-1" data-aos="fade-up" data-aos-delay="100">
           <div class="feature-icon custom-blue">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
               stroke-linecap="round" stroke-linejoin="round">
@@ -670,7 +688,7 @@
           <p>Pantau nilai tugas, ujian, dan rapor secara langsung. Dapatkan visualisasi tren grafik yang memudahkan
             evaluasi perkembangan akademik anak.</p>
         </div>
-        <div class="feature-card" id="feat-card-2">
+        <div class="feature-card" id="feat-card-2" data-aos="fade-up" data-aos-delay="200">
           <div class="feature-icon custom-green">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
               stroke-linecap="round" stroke-linejoin="round">
@@ -685,7 +703,7 @@
           <p>Pantau absensi dan rekap kehadiran harian anak secara akurat. Pastikan ananda mengikuti seluruh kegiatan
             pembelajaran di sekolah.</p>
         </div>
-        <div class="feature-card" id="feat-card-3">
+        <div class="feature-card" id="feat-card-3" data-aos="fade-up" data-aos-delay="300">
           <div class="feature-icon custom-purple">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
               stroke-linecap="round" stroke-linejoin="round">
@@ -703,13 +721,13 @@
   <!-- ===== CARA KERJA SECTION ===== -->
   <section class="howto-section" id="cara-kerja">
     <div class="section-container">
-      <div class="section-header">
+      <div class="section-header" data-aos="fade-up">
         <h2 class="section-title">Mulai dalam <span class="gradient-text">4 Langkah Mudah</span></h2>
         <p class="section-desc">Tidak perlu instalasi apapun. Cukup buka browser dan mulai pantau akademik anak Anda.
         </p>
       </div>
       <div class="steps-container">
-        <div class="step-card" id="step-card-1">
+        <div class="step-card" id="step-card-1" data-aos="fade-up" data-aos-delay="100">
           <div class="step-number">01</div>
           <div class="step-icon">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -718,7 +736,8 @@
             </svg>
           </div>
           <h3>Buka Halaman Utama</h3>
-          <p>Kunjungi website Cognitia dan Anda akan disambut dengan tampilan landing page yang informatif.</p>
+          <p>Kunjungi website Cognitia dan Anda akan disambut dengan tampilan landing page yang informatif dan
+            profesional.</p>
         </div>
         <div class="step-connector">
           <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
@@ -726,7 +745,7 @@
             <polyline points="9 18 15 12 9 6" />
           </svg>
         </div>
-        <div class="step-card" id="step-card-2">
+        <div class="step-card" id="step-card-2" data-aos="fade-up" data-aos-delay="200">
           <div class="step-number">02</div>
           <div class="step-icon">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -735,7 +754,8 @@
             </svg>
           </div>
           <h3>Klik "Pantau Ananda"</h3>
-          <p>Tekan tombol <strong>"Pantau Ananda"</strong> di navigasi atau tombol utama untuk membuka form masuk wali kelas.</p>
+          <p>Tekan tombol <strong>"Pantau Ananda"</strong> di navigasi atau tombol utama untuk membuka form masuk wali
+            kelas.</p>
         </div>
         <div class="step-connector">
           <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
@@ -743,16 +763,18 @@
             <polyline points="9 18 15 12 9 6" />
           </svg>
         </div>
-        <div class="step-card" id="step-card-3">
+        <div class="step-card" id="step-card-3" data-aos="fade-up" data-aos-delay="300">
           <div class="step-number">03</div>
           <div class="step-icon">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
               <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
               <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
             </svg>
           </div>
           <h3>Masukkan NISN & Sandi</h3>
-          <p>Masukkan Nomor Induk Siswa Nasional (NISN) beserta kata sandi yang valid untuk masuk ke akun portal Anda.</p>
+          <p>Masukkan Nomor Induk Siswa Nasional (NISN) beserta kata sandi yang valid untuk masuk ke akun portal Anda.
+          </p>
         </div>
         <div class="step-connector">
           <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
@@ -760,7 +782,7 @@
             <polyline points="9 18 15 12 9 6" />
           </svg>
         </div>
-        <div class="step-card" id="step-card-4">
+        <div class="step-card" id="step-card-4" data-aos="fade-up" data-aos-delay="400">
           <div class="step-number">04</div>
           <div class="step-icon">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -770,11 +792,12 @@
             </svg>
           </div>
           <h3>Analisis Data Akademik</h3>
-          <p>Eksplorasi grafik nilai real-time, pantau rekap kehadiran harian, dan komunikasikan perkembangan belajar anak.</p>
+          <p>Eksplorasi grafik nilai real-time, pantau rekap kehadiran harian, dan komunikasikan perkembangan belajar
+            anak.</p>
         </div>
       </div>
       <div class="howto-cta">
-        <a href="Login.html" class="btn-primary large" id="howto-cta-btn">
+        <a href="pages/login.html" class="btn-primary large" id="howto-cta-btn">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
             <polyline points="10 17 15 12 10 7" />
@@ -790,7 +813,7 @@
   <section class="about-section" id="tentang">
     <div class="section-container">
       <div class="about-grid">
-        <div class="about-text">
+        <div class="about-text" data-aos="fade-right">
           <h2 class="section-title">Jembatan Komunikasi<br /><span class="gradient-text">Orang Tua & Akademik</span>
           </h2>
           <p>Cognitia lahir dari kebutuhan nyata para orang tua yang ingin tetap terlibat aktif dalam perjalanan
@@ -824,7 +847,7 @@
             </div>
           </div>
         </div>
-        <div class="about-visual">
+        <div class="about-visual" data-aos="fade-left" data-aos-delay="200">
           <div class="about-card-stack">
             <div class="acard acard-back"></div>
             <div class="acard acard-mid"></div>
@@ -867,12 +890,12 @@
 
   <!-- ===== CALL TO ACTION (CTA) ===== -->
   <section class="cta-section" id="cta">
-    <div class="cta-container">
+    <div class="cta-container" data-aos="zoom-in">
       <h2 class="cta-title">Pantau Perkembangan Siswa Sekarang</h2>
       <p class="cta-desc">Bergabunglah dengan ribuan orang tua lainnya yang telah memantau dan mendukung perjalanan
         akademik putra-putri mereka secara langsung dan real-time.</p>
       <div class="cta-btn-wrapper">
-        <a href="Login.html" class="btn-primary large" id="cta-dashboard-btn">
+        <a href="pages/login.html" class="btn-primary large" id="cta-dashboard-btn">
           Masuk ke Dashboard
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
             stroke-linecap="round" stroke-linejoin="round" style="margin-left: 0.25rem;">
@@ -897,7 +920,7 @@
         <a href="#fitur">Fitur</a>
         <a href="#cara-kerja">Cara Kerja</a>
         <a href="#tentang">Tentang</a>
-        <a href="Login.html">Dashboard</a>
+        <a href="pages/login.html">Dashboard</a>
       </div>
       <div class="footer-links">
         <h4>Platform</h4>
@@ -1038,7 +1061,7 @@
     </div>
   </div>
 
-  <script src="main.js"></script>
+  <script src="js/main.js"></script>
 </body>
 
 </html>

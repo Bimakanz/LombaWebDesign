@@ -1,17 +1,23 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dashboard Guru — Cognitia | Pantau Akademik Kelas</title>
-  <meta name="description" content="Dashboard guru Cognitia. Pantau nilai siswa, ranking kelas, dan perkembangan akademik secara lengkap." />
+  <meta name="description"
+    content="Dashboard guru Cognitia. Pantau nilai siswa, ranking kelas, dan perkembangan akademik secara lengkap." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
-  <link rel="icon" type="image/png" href="logo.png" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="icon" type="image/png" href="../assets/images/logo.png" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <script>
     tailwind.config = {
@@ -42,6 +48,7 @@
     .dash-section {
       display: none;
     }
+
     .dash-section.active {
       display: block;
     }
@@ -56,10 +63,12 @@
       font-size: 0.75rem;
       font-weight: 600;
     }
+
     .badge.excellent {
       background-color: #ECFDF5 !important;
       color: #059669 !important;
     }
+
     .badge.good {
       background-color: #EFF6FF !important;
       color: #2563EB !important;
@@ -78,17 +87,20 @@
       flex-direction: column !important;
       gap: 1rem !important;
     }
+
     .student-card:hover {
       transform: translateY(-4px) !important;
       border-color: #3B82F6 !important;
       box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.05), 0 10px 10px -5px rgba(59, 130, 246, 0.02) !important;
     }
+
     .scard-header {
       display: flex !important;
       align-items: center !important;
       gap: 0.75rem !important;
       justify-content: flex-start !important;
     }
+
     .scard-avatar {
       width: 2.75rem !important;
       height: 2.75rem !important;
@@ -102,20 +114,24 @@
       justify-content: center !important;
       box-shadow: inset 0 2px 4px rgba(37, 99, 235, 0.06) !important;
     }
+
     .scard-info {
       display: flex !important;
       flex-direction: column !important;
     }
+
     .scard-name {
       font-weight: 700 !important;
       color: #1E293B !important;
       font-size: 0.9375rem !important;
       line-height: 1.25rem !important;
     }
+
     .scard-nis {
       color: #94A3B8 !important;
       font-size: 0.75rem !important;
     }
+
     .scard-avg {
       display: flex !important;
       justify-content: space-between !important;
@@ -123,11 +139,13 @@
       border-top: 1px dashed #F1F5F9 !important;
       padding-top: 0.75rem !important;
     }
+
     .scard-avg-label {
       font-size: 0.75rem !important;
       color: #94A3B8 !important;
       font-weight: 500 !important;
     }
+
     .scard-avg-val {
       font-weight: 800 !important;
       color: #2563EB !important;
@@ -142,15 +160,18 @@
       padding: 1.25rem !important;
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.01) !important;
     }
+
     .scard-title {
       font-weight: 600 !important;
       color: #334155 !important;
       font-size: 0.875rem !important;
     }
+
     .scard-score {
       font-weight: 800 !important;
       font-size: 1.125rem !important;
     }
+
     .scard-progress-bg {
       height: 0.375rem !important;
       border-radius: 9999px !important;
@@ -158,6 +179,7 @@
       overflow: hidden !important;
       margin-top: 0.75rem !important;
     }
+
     .scard-progress-fill {
       height: 100% !important;
       border-radius: 9999px !important;
@@ -172,12 +194,14 @@
       width: 18% !important;
       min-width: 80px !important;
     }
+
     .podium-rank {
       font-size: 1.25rem !important;
       font-weight: 800 !important;
       color: #64748B !important;
       margin-bottom: 0.5rem !important;
     }
+
     .podium-bar {
       width: 100% !important;
       height: 100% !important;
@@ -191,24 +215,27 @@
       color: white !important;
       transition: all 0.3s ease !important;
     }
+
     .podium-bar:hover {
       transform: translateY(-2px) !important;
       box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05) !important;
     }
+
     .podium-name {
       font-size: 0.75rem !important;
       font-weight: 750 !important;
       text-align: center !important;
-      text-shadow: 0 1px 1px rgba(0,0,0,0.1) !important;
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1) !important;
       white-space: nowrap !important;
       overflow: hidden !important;
       text-overflow: ellipsis !important;
       width: 100% !important;
     }
+
     .podium-avg {
       font-size: 1.125rem !important;
       font-weight: 800 !important;
-      text-shadow: 0 1px 1px rgba(0,0,0,0.1) !important;
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1) !important;
     }
 
     /* Pie Chart legend list styles */
@@ -223,15 +250,18 @@
       transition: all 0.2s ease;
       font-size: 0.8rem;
     }
+
     .pie-legend-item:hover {
       background-color: #F8FAFC;
     }
+
     .pie-legend-dot {
       width: 0.625rem;
       height: 0.625rem;
       border-radius: 9999px;
       flex-shrink: 0;
     }
+
     .pie-legend-name {
       color: #334155;
       font-weight: 500;
@@ -240,10 +270,12 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
+
     .pie-legend-score {
       font-weight: 700;
       color: #1E293B;
     }
+
     .pie-legend-pct {
       color: #94A3B8;
       font-size: 0.75rem;
@@ -255,9 +287,11 @@
         transform: translateX(-100%);
         transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       }
+
       #sidebar.active {
         transform: translateX(0);
       }
+
       #sidebar-overlay {
         display: none;
         position: fixed;
@@ -266,6 +300,7 @@
         backdrop-filter: blur(4px);
         z-index: 40;
       }
+
       #sidebar-overlay.active {
         display: block;
       }
@@ -274,7 +309,9 @@
     /* ====== HOVER EFFECTS — same mechanics as index.html ====== */
 
     /* Shared bounce easing — matches --transition-bounce from style.css */
-    :root { --t-bounce: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    :root {
+      --t-bounce: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
 
     /* ---- Stat / Insight Cards ---- */
     .insight-card {
@@ -283,6 +320,7 @@
       overflow: hidden !important;
       z-index: 1 !important;
     }
+
     .insight-card::before {
       content: '' !important;
       position: absolute !important;
@@ -292,15 +330,21 @@
       opacity: 0 !important;
       transition: opacity 0.3s ease !important;
     }
+
     .insight-card:hover {
       transform: translateY(-5px) !important;
-      box-shadow: 0 10px 15px -3px rgba(15,23,42,0.06), 0 4px 6px -4px rgba(15,23,42,0.04) !important;
-      border-color: rgba(37,99,235,0.18) !important;
+      box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.06), 0 4px 6px -4px rgba(15, 23, 42, 0.04) !important;
+      border-color: rgba(37, 99, 235, 0.18) !important;
     }
-    .insight-card:hover::before { opacity: 1 !important; }
+
+    .insight-card:hover::before {
+      opacity: 1 !important;
+    }
+
     .insight-card .icard-icon {
       transition: transform var(--t-bounce) !important;
     }
+
     .insight-card:hover .icard-icon {
       transform: scale(1.12) rotate(-5deg) !important;
     }
@@ -312,6 +356,7 @@
       overflow: hidden !important;
       z-index: 1 !important;
     }
+
     .student-card::before {
       content: '' !important;
       position: absolute !important;
@@ -321,15 +366,21 @@
       opacity: 0 !important;
       transition: opacity 0.3s ease !important;
     }
+
     .student-card:hover {
       transform: translateY(-5px) !important;
-      box-shadow: 0 10px 15px -3px rgba(15,23,42,0.07), 0 4px 6px -4px rgba(15,23,42,0.04) !important;
+      box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.07), 0 4px 6px -4px rgba(15, 23, 42, 0.04) !important;
       border-color: #2563EB !important;
     }
-    .student-card:hover::before { opacity: 1 !important; }
+
+    .student-card:hover::before {
+      opacity: 1 !important;
+    }
+
     .student-card .scard-avatar {
       transition: transform var(--t-bounce) !important;
     }
+
     .student-card:hover .scard-avatar {
       transform: scale(1.1) rotate(-5deg) !important;
     }
@@ -341,6 +392,7 @@
       overflow: hidden;
       z-index: 1;
     }
+
     .chart-card-tw::before {
       content: '';
       position: absolute;
@@ -350,22 +402,28 @@
       opacity: 0;
       transition: opacity 0.3s ease;
     }
+
     .chart-card-tw:hover {
       transform: translateY(-4px);
-      box-shadow: 0 10px 15px -3px rgba(15,23,42,0.06), 0 4px 6px -4px rgba(15,23,42,0.04);
+      box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.06), 0 4px 6px -4px rgba(15, 23, 42, 0.04);
     }
-    .chart-card-tw:hover::before { opacity: 1; }
+
+    .chart-card-tw:hover::before {
+      opacity: 1;
+    }
 
     /* ---- Sidebar Nav Links — slide-in like nav-link underline ---- */
     .sidebar-link {
       transition: color 0.3s ease, background-color 0.3s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), padding-left 0.3s ease !important;
       position: relative !important;
     }
+
     .sidebar-link:not(.active):hover {
       transform: translateX(5px) !important;
       background-color: rgba(239, 246, 255, 0.8) !important;
       color: #1E40AF !important;
     }
+
     .sidebar-link:not(.active):hover svg {
       stroke: #2563EB !important;
     }
@@ -374,12 +432,15 @@
     .bottom-nav-item {
       transition: color 0.3s ease, transform var(--t-bounce) !important;
     }
+
     .bottom-nav-item:hover {
       transform: translateY(-2px) !important;
     }
+
     .bottom-nav-item.active {
       color: #2563EB !important;
     }
+
     .bottom-nav-item.active svg {
       stroke: #2563EB !important;
     }
@@ -390,16 +451,20 @@
       transform: translateY(30px);
       transition: opacity 0.6s ease-out, transform 0.6s ease-out;
     }
+
     .reveal.visible {
       opacity: 1;
       transform: translateY(0);
     }
   </style>
 </head>
+
 <body class="min-h-screen text-slate-700 antialiased">
 
   <!-- ===== FULLSCREEN LOADER ===== -->
-  <div class="fixed inset-0 z-[100] bg-white flex flex-col items-center justify-center transition-all duration-300 hidden" id="teacher-loader">
+  <div
+    class="fixed inset-0 z-[100] bg-white flex flex-col items-center justify-center transition-all duration-300 hidden"
+    id="teacher-loader">
     <div class="flex flex-col items-center gap-4">
       <div class="w-12 h-12 border-4 border-slate-100 border-t-blue-600 rounded-full animate-spin"></div>
       <h3 class="text-lg font-bold text-slate-800">Memuat Data Kelas...</h3>
@@ -412,9 +477,9 @@
     <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle Sidebar">
       <span></span><span></span><span></span>
     </button>
-    <a href="index.html" class="nav-logo">
+    <a href="../index.html" class="nav-logo">
       <div class="logo-icon">
-        <img src="logo.png" alt="Cognitia Logo" style="width: 24px; height: 24px; object-fit: contain;" />
+        <img src="../assets/images/logo.png" alt="Cognitia Logo" style="width: 24px; height: 24px; object-fit: contain;" />
       </div>
       <span class="logo-text">Cognitia</span>
     </a>
@@ -427,46 +492,77 @@
   <!-- ===== SIDEBAR ===== -->
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
-      <a href="index.html" class="nav-logo">
+      <a href="../index.html" class="nav-logo">
         <span class="logo-text">Cognitia</span>
       </a>
       <button class="sidebar-close" id="sidebar-close" aria-label="Close Sidebar">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
       </button>
     </div>
 
-      <!-- Profile Card inside Sidebar -->
-      <div class="bg-slate-50/50 border border-slate-100 rounded-2xl p-4 flex items-center gap-3">
-        <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-500 to-indigo-600 text-white font-bold flex items-center justify-center shadow-inner text-sm" id="sb-avatar">
-          PB
-        </div>
-        <div class="flex flex-col text-left overflow-hidden">
-          <span class="text-sm font-bold text-slate-800 leading-tight truncate" id="sb-teacher-name">Pak Budi</span>
-          <span class="text-[10px] text-slate-400 mt-0.5 truncate" id="sb-class">Wali Kelas X-1</span>
-        </div>
+    <!-- Profile Card inside Sidebar -->
+    <div class="bg-slate-50/50 border border-slate-100 rounded-2xl p-4 flex items-center gap-3">
+      <div
+        class="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-500 to-indigo-600 text-white font-bold flex items-center justify-center shadow-inner text-sm"
+        id="sb-avatar">
+        PB
       </div>
+      <div class="flex flex-col text-left overflow-hidden">
+        <span class="text-sm font-bold text-slate-800 leading-tight truncate" id="sb-teacher-name">Pak Budi</span>
+        <span class="text-[10px] text-slate-400 mt-0.5 truncate" id="sb-class">Wali Kelas X-1</span>
+      </div>
+    </div>
 
-      <!-- Navigation Links -->
-      <nav class="space-y-1">
-        <a href="#" class="sidebar-link active flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 text-slate-500 hover:text-slate-900" data-section="dashboard" id="nav-dashboard">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-          <span>Dashboard</span>
-        </a>
-        <a href="#" class="sidebar-link flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium text-slate-500 hover:text-slate-900 transition-all duration-200" data-section="students" id="nav-students">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          <span>Daftar Siswa</span>
-        </a>
-        <a href="#" class="sidebar-link flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium text-slate-500 hover:text-slate-900 transition-all duration-200" data-section="ranking" id="nav-ranking">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5C7 4 7 7 7 7"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5C17 4 17 7 17 7"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
-          <span>Ranking Kelas</span>
-        </a>
-      </nav>
+    <!-- Navigation Links -->
+    <nav class="space-y-1">
+      <a href="#"
+        class="sidebar-link active flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 text-slate-500 hover:text-slate-900"
+        data-section="dashboard" id="nav-dashboard">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <rect x="3" y="3" width="7" height="7" rx="1" />
+          <rect x="14" y="3" width="7" height="7" rx="1" />
+          <rect x="3" y="14" width="7" height="7" rx="1" />
+          <rect x="14" y="14" width="7" height="7" rx="1" />
+        </svg>
+        <span>Dashboard</span>
+      </a>
+      <a href="#"
+        class="sidebar-link flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium text-slate-500 hover:text-slate-900 transition-all duration-200"
+        data-section="students" id="nav-students">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+          <circle cx="9" cy="7" r="4" />
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+          <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+        </svg>
+        <span>Daftar Siswa</span>
+      </a>
+      <a href="#"
+        class="sidebar-link flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium text-slate-500 hover:text-slate-900 transition-all duration-200"
+        data-section="ranking" id="nav-ranking">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5C7 4 7 7 7 7" />
+          <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5C17 4 17 7 17 7" />
+          <path d="M4 22h16" />
+          <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20 7 22" />
+          <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20 17 22" />
+          <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
+        </svg>
+        <span>Ranking Kelas</span>
+      </a>
+    </nav>
     </div>
 
     <!-- Bottom Actions (Logout) -->
     <div>
-      <a href="index.html" class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-semibold text-red-500 hover:bg-red-50 hover:text-red-650 transition-colors" id="nav-back-home">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <a href="#" onclick="confirmLogout(event)"
+        class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-semibold text-red-500 hover:bg-red-50 hover:text-red-650 transition-colors"
+        id="nav-back-home">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
           <polyline points="16 17 21 12 16 7"></polyline>
           <line x1="21" y1="12" x2="9" y2="12"></line>
@@ -477,21 +573,24 @@
   </aside>
 
   <!-- ===== MOBILE HEADER ===== -->
-  <header class="md:hidden sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-slate-100 px-4 h-14 flex items-center justify-between shadow-sm">
+  <header
+    class="md:hidden sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-slate-100 px-4 h-14 flex items-center justify-between shadow-sm">
     <button id="sidebar-toggle" class="text-slate-600 hover:text-slate-900 p-2 rounded-xl">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
     </button>
-    
+
     <div class="flex items-center gap-2">
       <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center shadow-md shadow-blue-500/10">
         <svg width="18" height="18" viewBox="0 0 28 28" fill="none">
-          <path d="M14 2L4 7v7c0 6.1 4.3 11.8 10 13 5.7-1.2 10-6.9 10-13V7L14 2z" fill="white"/>
-          <path d="M9 14l3 3 7-7" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M14 2L4 7v7c0 6.1 4.3 11.8 10 13 5.7-1.2 10-6.9 10-13V7L14 2z" fill="white" />
+          <path d="M9 14l3 3 7-7" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
       </div>
       <span class="text-base font-extrabold text-slate-800">Cognitia</span>
     </div>
-    
+
     <div class="w-10"></div> <!-- spacing balance -->
   </header>
 
@@ -509,9 +608,14 @@
             <p class="text-xs text-slate-400 mt-0.5">Analisis data kolektif kelas X-1</p>
           </div>
           <div>
-            <div class="inline-flex items-center gap-2 px-4 py-2 bg-white border border-slate-100 rounded-xl shadow-sm text-sm text-slate-600" id="date-badge">
+            <div
+              class="inline-flex items-center gap-2 px-4 py-2 bg-white border border-slate-100 rounded-xl shadow-sm text-sm text-slate-600"
+              id="date-badge">
               <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+                <rect x="3" y="4" width="18" height="18" rx="2" />
+                <line x1="16" y1="2" x2="16" y2="6" />
+                <line x1="8" y1="2" x2="8" y2="6" />
+                <line x1="3" y1="10" x2="21" y2="10" />
               </svg>
               <span id="current-date" class="font-medium">Memuat tanggal...</span>
             </div>
@@ -519,12 +623,15 @@
         </div>
 
         <!-- School Hero Banner Card with Full Unsplash Background -->
-        <div class="relative overflow-hidden rounded-3xl p-6 sm:p-8 text-white mb-8 shadow-lg shadow-blue-500/5 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=1000&auto=format&fit=crop');">
+        <div
+          class="relative overflow-hidden rounded-3xl p-6 sm:p-8 text-white mb-8 shadow-lg shadow-blue-500/5 bg-cover bg-center"
+          style="background-image: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=1000&auto=format&fit=crop');">
           <!-- Gradient Overlay for excellent text contrast -->
           <div class="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-900/60 to-transparent z-10"></div>
-          
+
           <div class="relative z-20 max-w-xl">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold bg-white/20 backdrop-blur-md text-blue-50 mb-4 border border-white/10">
+            <span
+              class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold bg-white/20 backdrop-blur-md text-blue-50 mb-4 border border-white/10">
               <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
               Tahun Ajaran 2025/2026 • Genap
             </span>
@@ -532,7 +639,8 @@
               Selamat Datang Kembali, <span id="header-teacher-name" class="text-amber-300">Pak Budi</span>!
             </h1>
             <p class="text-sm text-slate-100/90 mt-2 leading-relaxed font-medium">
-              Pantau perkembangan akademik, statistik nilai, dan grafik pencapaian belajar siswa kelas <strong>X-1</strong> secara mudah dalam satu ruang kerja.
+              Pantau perkembangan akademik, statistik nilai, dan grafik pencapaian belajar siswa kelas
+              <strong>X-1</strong> secara mudah dalam satu ruang kerja.
             </p>
             <div class="flex items-center gap-4 mt-6 pt-4 border-t border-white/10 text-xs">
               <div>
@@ -545,11 +653,16 @@
         <!-- Insight Cards Grid -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <!-- Card 1: Total Siswa -->
-          <div class="insight-card reveal bg-white border border-slate-100 rounded-2xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.02)]" id="card-total">
+          <div
+            class="insight-card reveal bg-white border border-slate-100 rounded-2xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.02)]"
+            id="card-total">
             <div class="flex items-center justify-between mb-4">
               <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Siswa</span>
               <div class="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                </svg>
               </div>
             </div>
             <div class="flex items-baseline gap-2">
@@ -559,11 +672,15 @@
           </div>
 
           <!-- Card 2: Rata-rata Kelas -->
-          <div class="insight-card reveal bg-white border border-slate-100 rounded-2xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.02)]" id="card-class-avg">
+          <div
+            class="insight-card reveal bg-white border border-slate-100 rounded-2xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.02)]"
+            id="card-class-avg">
             <div class="flex items-center justify-between mb-4">
               <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Rata-rata Kelas</span>
               <div class="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                </svg>
               </div>
             </div>
             <div class="flex items-baseline gap-2">
@@ -573,11 +690,16 @@
           </div>
 
           <!-- Card 3: Nilai Tertinggi -->
-          <div class="insight-card reveal bg-white border border-slate-100 rounded-2xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.02)]" id="card-class-highest">
+          <div
+            class="insight-card reveal bg-white border border-slate-100 rounded-2xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.02)]"
+            id="card-class-highest">
             <div class="flex items-center justify-between mb-4">
               <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Nilai Tertinggi</span>
               <div class="w-10 h-10 rounded-xl bg-violet-50 flex items-center justify-center text-violet-600">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path
+                    d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                </svg>
               </div>
             </div>
             <div class="flex flex-col">
@@ -587,11 +709,17 @@
           </div>
 
           <!-- Card 4: Nilai Terendah -->
-          <div class="insight-card reveal bg-white border border-slate-100 rounded-2xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.02)]" id="card-class-lowest">
+          <div
+            class="insight-card reveal bg-white border border-slate-100 rounded-2xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.02)]"
+            id="card-class-lowest">
             <div class="flex items-center justify-between mb-4">
               <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Nilai Terendah</span>
               <div class="w-10 h-10 rounded-xl bg-rose-50 flex items-center justify-center text-rose-600">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" y1="8" x2="12" y2="12" />
+                  <line x1="12" y1="16" x2="12.01" y2="16" />
+                </svg>
               </div>
             </div>
             <div class="flex flex-col">
@@ -604,7 +732,8 @@
         <!-- Charts Row -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
           <!-- Bar Chart Card -->
-          <div class="chart-card-tw reveal bg-white border border-slate-100 rounded-2xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.02)]">
+          <div
+            class="chart-card-tw reveal bg-white border border-slate-100 rounded-2xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.02)]">
             <div class="mb-4">
               <h3 class="text-base font-bold text-slate-800">Rata-rata Nilai per Mapel</h3>
               <p class="text-xs text-slate-450 mt-0.5">Kelas X-1 — Semester Genap</p>
@@ -615,7 +744,8 @@
           </div>
 
           <!-- Line Chart Card -->
-          <div class="chart-card-tw reveal bg-white border border-slate-100 rounded-2xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.02)]">
+          <div
+            class="chart-card-tw reveal bg-white border border-slate-100 rounded-2xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.02)]">
             <div class="mb-4">
               <h3 class="text-base font-bold text-slate-800">Tren Rata-rata Kelas</h3>
               <p class="text-xs text-slate-450 mt-0.5">Perkembangan per Semester</p>
@@ -629,7 +759,8 @@
         <!-- Pie Chart & Summary Table Row -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <!-- Pie Chart -->
-          <div class="chart-card-tw reveal bg-white border border-slate-100 rounded-2xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.02)]">
+          <div
+            class="chart-card-tw reveal bg-white border border-slate-100 rounded-2xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.02)]">
             <div class="mb-6">
               <h3 class="text-base font-bold text-slate-800">Distribusi Nilai Mapel Kelas</h3>
               <p class="text-xs text-slate-450 mt-0.5">Proporsi rata-rata seluruh mata pelajaran kelas X-1</p>
@@ -645,7 +776,8 @@
           </div>
 
           <!-- Summary Table -->
-          <div class="chart-card-tw reveal bg-white border border-slate-100 rounded-2xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.02)]">
+          <div
+            class="chart-card-tw reveal bg-white border border-slate-100 rounded-2xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.02)]">
             <div class="mb-6">
               <h3 class="text-base font-bold text-slate-800">Rekap Rata-rata per Semester</h3>
             </div>
@@ -671,7 +803,8 @@
       <section class="dash-section" id="section-students">
         <div class="mb-6">
           <h2 class="text-2xl font-bold text-slate-800 tracking-tight">Daftar Siswa Kelas X-1</h2>
-          <p class="text-sm text-slate-500 mt-1">Pilih kartu siswa untuk meninjau transkrip nilai, mapel unggulan, dan analisis hasil belajar.</p>
+          <p class="text-sm text-slate-500 mt-1">Pilih kartu siswa untuk meninjau transkrip nilai, mapel unggulan, dan
+            analisis hasil belajar.</p>
         </div>
 
         <!-- Student Cards Grid -->
@@ -681,15 +814,23 @@
 
         <!-- Student Detail Panel (hidden by default) -->
         <div id="student-detail-panel" class="hidden space-y-8">
-          <button class="inline-flex items-center gap-2 text-sm font-semibold text-slate-500 hover:text-blue-600 transition-colors" id="detail-back-btn">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          <button
+            class="inline-flex items-center gap-2 text-sm font-semibold text-slate-500 hover:text-blue-600 transition-colors"
+            id="detail-back-btn">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <line x1="19" y1="12" x2="5" y2="12" />
+              <polyline points="12 19 5 12 12 5" />
+            </svg>
             <span>Kembali ke Daftar</span>
           </button>
 
           <!-- Detail Header Card -->
-          <div class="bg-white border border-slate-100 rounded-2xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.02)] flex flex-col md:flex-row items-center justify-between gap-6">
+          <div
+            class="bg-white border border-slate-100 rounded-2xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.02)] flex flex-col md:flex-row items-center justify-between gap-6">
             <div class="flex items-center gap-4">
-              <div class="w-16 h-16 rounded-full bg-gradient-to-tr from-blue-500 to-indigo-600 text-white font-bold text-xl flex items-center justify-center shadow-inner" id="detail-avatar">
+              <div
+                class="w-16 h-16 rounded-full bg-gradient-to-tr from-blue-500 to-indigo-600 text-white font-bold text-xl flex items-center justify-center shadow-inner"
+                id="detail-avatar">
                 —
               </div>
               <div class="text-center md:text-left">
@@ -705,15 +846,22 @@
           </div>
 
           <!-- Best Subject Highlight -->
-          <div class="bg-amber-50/40 border border-amber-100 rounded-2xl p-6 flex items-start gap-4" id="best-subject-card">
-            <div class="w-10 h-10 rounded-xl bg-amber-100/80 flex items-center justify-center text-amber-600 flex-shrink-0">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 2L15.09(8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+          <div class="bg-amber-50/40 border border-amber-100 rounded-2xl p-6 flex items-start gap-4"
+            id="best-subject-card">
+            <div
+              class="w-10 h-10 rounded-xl bg-amber-100/80 flex items-center justify-center text-amber-600 flex-shrink-0">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path
+                  d="M12 2L15.09(8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+              </svg>
             </div>
             <div>
-              <span class="text-[10px] font-bold text-amber-600 uppercase tracking-wider block">Mata Pelajaran Unggulan</span>
+              <span class="text-[10px] font-bold text-amber-600 uppercase tracking-wider block">Mata Pelajaran
+                Unggulan</span>
               <div class="flex items-baseline gap-2 mt-1">
                 <span class="text-lg font-bold text-slate-800" id="best-subject-name">—</span>
-                <span class="text-sm font-semibold text-amber-600">(Nilai: <span id="best-subject-score">—</span>)</span>
+                <span class="text-sm font-semibold text-amber-600">(Nilai: <span
+                    id="best-subject-score">—</span>)</span>
               </div>
             </div>
           </div>
@@ -751,11 +899,14 @@
       <section class="dash-section" id="section-ranking">
         <div class="mb-8">
           <h2 class="text-2xl font-bold text-slate-800 tracking-tight">Ranking Kelas X-1</h2>
-          <p class="text-sm text-slate-500 mt-1">Peringkat siswa berdasarkan pencapaian akademis rata-rata semester ini.</p>
+          <p class="text-sm text-slate-500 mt-1">Peringkat siswa berdasarkan pencapaian akademis rata-rata semester ini.
+          </p>
         </div>
 
         <!-- Podium Container -->
-        <div class="flex items-end justify-center gap-3 sm:gap-6 md:gap-8 h-80 bg-white border border-slate-100 rounded-3xl p-6 sm:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.02)] mx-auto mb-10 overflow-hidden" id="podium-container">
+        <div
+          class="flex items-end justify-center gap-3 sm:gap-6 md:gap-8 h-80 bg-white border border-slate-100 rounded-3xl p-6 sm:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.02)] mx-auto mb-10 overflow-hidden"
+          id="podium-container">
           <!-- Injected by JS -->
         </div>
 
@@ -787,21 +938,78 @@
   </main>
 
   <!-- ===== MOBILE BOTTOM NAVIGATION ===== -->
-  <nav class="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-white/95 backdrop-blur-md border-t border-slate-100 flex items-center justify-around h-16 shadow-lg" id="mobile-bottom-nav">
-    <a href="#" class="bottom-nav-item active flex flex-col items-center gap-1 text-[10px] font-semibold text-slate-400 transition-colors" data-section="dashboard" id="bn-dashboard">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+  <nav
+    class="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-white/95 backdrop-blur-md border-t border-slate-100 flex items-center justify-around h-16 shadow-lg"
+    id="mobile-bottom-nav">
+    <a href="#"
+      class="bottom-nav-item active flex flex-col items-center gap-1 text-[10px] font-semibold text-slate-400 transition-colors"
+      data-section="dashboard" id="bn-dashboard">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <rect x="3" y="3" width="7" height="7" rx="1" />
+        <rect x="14" y="3" width="7" height="7" rx="1" />
+        <rect x="3" y="14" width="7" height="7" rx="1" />
+        <rect x="14" y="14" width="7" height="7" rx="1" />
+      </svg>
       <span>Dashboard</span>
     </a>
-    <a href="#" class="bottom-nav-item flex flex-col items-center gap-1 text-[10px] font-semibold text-slate-400 transition-colors" data-section="students" id="bn-students">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    <a href="#"
+      class="bottom-nav-item flex flex-col items-center gap-1 text-[10px] font-semibold text-slate-400 transition-colors"
+      data-section="students" id="bn-students">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+      </svg>
       <span>Siswa</span>
     </a>
-    <a href="#" class="bottom-nav-item flex flex-col items-center gap-1 text-[10px] font-semibold text-slate-400 transition-colors" data-section="ranking" id="bn-ranking">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5C7 4 7 7 7 7"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5C17 4 17 7 17 7"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+    <a href="#"
+      class="bottom-nav-item flex flex-col items-center gap-1 text-[10px] font-semibold text-slate-400 transition-colors"
+      data-section="ranking" id="bn-ranking">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5C7 4 7 7 7 7" />
+        <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5C17 4 17 7 17 7" />
+        <path d="M4 22h16" />
+        <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20 7 22" />
+        <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20 17 22" />
+        <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
+      </svg>
       <span>Ranking</span>
     </a>
   </nav>
 
-  <script src="teacher.js"></script>
+  <script src="../js/teacher.js"></script>
+  <script>
+    // Logout confirmation using SweetAlert2
+    function confirmLogout(e) {
+      e.preventDefault();
+      Swal.fire({
+        title: 'Keluar dari Dashboard?',
+        text: 'Anda akan kembali ke halaman utama Cognitia.',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3B82F6', // Blue to match teacher portal
+        cancelButtonColor: '#94a3b8',
+        confirmButtonText: 'Ya, Keluar',
+        cancelButtonText: 'Batal',
+        reverseButtons: true,
+        scrollbarPadding: false,
+        heightAuto: false,
+        customClass: {
+          popup: 'swal-popup-custom',
+          title: 'swal-title-custom',
+          confirmButton: 'swal-confirm-custom',
+          cancelButton: 'swal-cancel-custom'
+        }
+      }).then(function (result) {
+        if (result.isConfirmed) {
+          localStorage.removeItem('cognitia_teacher');
+          localStorage.removeItem('cognitia_loading');
+          window.location.href = '../index.html';
+        }
+      });
+    }
+  </script>
 </body>
+
 </html>
