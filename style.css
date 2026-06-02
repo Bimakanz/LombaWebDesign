@@ -1401,6 +1401,23 @@ button {
   font-size: 0.875rem;
 }
 
+.dash-header-right{
+  display: flex;
+  align-items: center;
+  gap: 0.87rem;
+  flex-wrap: wrap;
+}
+
+.custom-dropdown-menu{
+  position: relative;
+  display: inline-block;
+}
+
+.custom-dropdown-container{
+  position: relative;
+  display: inline-block;
+}
+
 .date-badge {
   display: inline-flex;
   align-items: center;
@@ -1413,6 +1430,91 @@ button {
   font-weight: 500;
   color: var(--text-muted);
   box-shadow: var(--shadow-sm);
+}
+
+#semester-dropdown-btn{
+  cursor: pointer;
+}
+
+#semester-dropdown-btn:hover{
+  background-color: rgba(0, 0, 0, 0.02);
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+.chevron-icon{
+  opacity: 0.5;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.custom-dropdown-container.open .chevron-icon{
+  transform: rotate(180deg);
+}
+
+.custom-dropdown-menu{
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  margin: 0;
+  list-style: none;
+  box-shadow: var(--shadow-md, 0 10px 25px -5px rgba(0, 0, 0, 0.08));
+  z-index: 1002;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.custom-dropdown-container.open .custom-dropdown-menu{
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-item {
+  padding: 0.5rem 0.75em;
+  font-size: 0.875rem;
+  color: var(--text-main, #333);
+  border-radius: calc(var(--radius-md) - 2px);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.dropdown-item:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+  color: var(--text-main, #000);
+}
+
+.dropdown-item.active {
+  background-color: rgba(109, 152, 148, 0.15);
+  color: #6d9894;
+  font-weight: 600;
+}
+
+
+.dash-section {
+  display: none;
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+.dash-section.active {
+  display: block;
+}
+
+.section-page-title {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.section-page-sub {
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  font-size: 0.875rem;
 }
 
 /* Sections */

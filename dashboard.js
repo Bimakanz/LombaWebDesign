@@ -1,253 +1,424 @@
-// dashboard.js - Logic for Dashboard Page
+// dashboard.js - Logic for Dashboard Page (FIXED FILTER & HTML SYNC)
 
 const studentsDB = {
-  "242510010": {
+  242510010: {
     nama: "Bima Sena",
-    kelas: "Kelas 11 — IPA",
+    kelas: "Kelas 12 — IPA",
     inisial: "BS",
     perkembangan_semester: [
-      { semester: "Kelas 10 S1", rata_rata: 78 },
-      { semester: "Kelas 10 S2", rata_rata: 83 },
-      { semester: "Kelas 11 S1", rata_rata: 88 },
-      { semester: "Kelas 11 S2", rata_rata: 94 }
+      { semester: "Kelas 10 S1", rata_rata: 78.5 },
+      { semester: "Kelas 10 S2", rata_rata: 83.2 },
+      { semester: "Kelas 11 S1", rata_rata: 88.0 },
+      { semester: "Kelas 11 S2", rata_rata: 90.7 },
+      { semester: "Kelas 12 S1", rata_rata: 92.5 },
+      { semester: "Kelas 12 S2", rata_rata: 95.0 },
     ],
-    detail_nilai: [
-      { mapel: "Matematika", nilai: 98 },
-      { mapel: "B. Indonesia", nilai: 88 },
-      { mapel: "B. Inggris", nilai: 65 }, 
-      { mapel: "PAI", nilai: 92 },
-      { mapel: "Tahfidz", nilai: 85 },
-      { mapel: "PKN", nilai: 74 },          
-      { mapel: "PJOK", nilai: 90 },
-      { mapel: "Informatika", nilai: 80 }
-    ]
+    semester_data: {
+      s10s1: [
+        { mapel: "Matematika", nilai: 75 },
+        { mapel: "B. Indonesia", nilai: 80 },
+        { mapel: "B. Inggris", nilai: 72 },
+        { mapel: "PAI", nilai: 85 },
+        { mapel: "Tahfidz", nilai: 80 },
+        { mapel: "PKN", nilai: 78 },
+        { mapel: "PJOK", nilai: 82 },
+        { mapel: "Informatika", nilai: 76 },
+      ],
+      s10s2: [
+        { mapel: "Matematika", nilai: 82 },
+        { mapel: "B. Indonesia", nilai: 80 },
+        { mapel: "B. Inggris", nilai: 78 },
+        { mapel: "PAI", nilai: 88 },
+        { mapel: "Tahfidz", nilai: 85 },
+        { mapel: "PKN", nilai: 82 },
+        { mapel: "PJOK", nilai: 85 },
+        { mapel: "Informatika", nilai: 86 },
+      ],
+      s11s1: [
+        { mapel: "Matematika", nilai: 85 },
+        { mapel: "B. Indonesia", nilai: 88 },
+        { mapel: "B. Inggris", nilai: 80 },
+        { mapel: "PAI", nilai: 90 },
+        { mapel: "Tahfidz", nilai: 85 },
+        { mapel: "PKN", nilai: 86 },
+        { mapel: "PJOK", nilai: 92 },
+        { mapel: "Informatika", nilai: 98 },
+      ],
+      s11s2: [
+        { mapel: "Matematika", nilai: 98 },
+        { mapel: "B. Indonesia", nilai: 88 },
+        { mapel: "B. Inggris", nilai: 85 },
+        { mapel: "PAI", nilai: 92 },
+        { mapel: "Tahfidz", nilai: 85 },
+        { mapel: "PKN", nilai: 88 },
+        { mapel: "PJOK", nilai: 92 },
+        { mapel: "Informatika", nilai: 98 },
+      ],
+      s12s1: [
+        { mapel: "Matematika", nilai: 98 },
+        { mapel: "B. Indonesia", nilai: 92 },
+        { mapel: "B. Inggris", nilai: 88 },
+        { mapel: "PAI", nilai: 92 },
+        { mapel: "Tahfidz", nilai: 90 },
+        { mapel: "PKN", nilai: 90 },
+        { mapel: "PJOK", nilai: 92 },
+        { mapel: "Informatika", nilai: 98 },
+      ],
+      s12s2: [
+        { mapel: "Matematika", nilai: 100 },
+        { mapel: "B. Indonesia", nilai: 95 },
+        { mapel: "B. Inggris", nilai: 92 },
+        { mapel: "PAI", nilai: 95 },
+        { mapel: "Tahfidz", nilai: 90 },
+        { mapel: "PKN", nilai: 94 },
+        { mapel: "PJOK", nilai: 94 },
+        { mapel: "Informatika", nilai: 100 },
+      ],
+    }
   },
-  "242510023": {
+  242510023: {
     nama: "Aksajreno Fathukhotir Hayu",
-    kelas: "Kelas 11 — IPS",
+    kelas: "Kelas 12 — IPS",
     inisial: "AH",
     perkembangan_semester: [
-      { semester: "Kelas 10 S1", rata_rata: 85 }, 
-      { semester: "Kelas 10 S2", rata_rata: 78 }, 
-      { semester: "Kelas 11 S1", rata_rata: 88 },
-      { semester: "Kelas 11 S2", rata_rata: 82 }  
+      { semester: "Kelas 10 S1", rata_rata: 85.0 },
+      { semester: "Kelas 10 S2", rata_rata: 74.2 },
+      { semester: "Kelas 11 S1", rata_rata: 84.0 },
+      { semester: "Kelas 11 S2", rata_rata: 77.7 },
+      { semester: "Kelas 12 S1", rata_rata: 91.3 },
+      { semester: "Kelas 12 S2", rata_rata: 71.2 },
     ],
-    detail_nilai: [
-      { mapel: "Matematika", nilai: 95 },   
-      { mapel: "B. Indonesia", nilai: 68 },  
-      { mapel: "B. Inggris", nilai: 88 },    
-      { mapel: "PAI", nilai: 72 },           
-      { mapel: "Tahfidz", nilai: 90 },       
-      { mapel: "PKN", nilai: 65 },           
-      { mapel: "PJOK", nilai: 84 },          
-      { mapel: "Informatika", nilai: 76 }    
-    ]
-  }
+    semester_data: {
+      s10s1: [
+        { mapel: "Matematika", nilai: 88 },
+        { mapel: "B. Indonesia", nilai: 82 },
+        { mapel: "B. Inggris", nilai: 85 },
+        { mapel: "PAI", nilai: 90 },
+        { mapel: "Tahfidz", nilai: 80 },
+        { mapel: "PKN", nilai: 84 },
+        { mapel: "PJOK", nilai: 86 },
+        { mapel: "Informatika", nilai: 85 },
+      ],
+      s10s2: [
+        { mapel: "Matematika", nilai: 70 }, 
+        { mapel: "B. Indonesia", nilai: 72 },
+        { mapel: "B. Inggris", nilai: 65 },
+        { mapel: "PAI", nilai: 80 },
+        { mapel: "Tahfidz", nilai: 74 },
+        { mapel: "PKN", nilai: 76 },
+        { mapel: "PJOK", nilai: 82 },
+        { mapel: "Informatika", nilai: 75 },
+      ],
+      s11s1: [
+        { mapel: "Matematika", nilai: 78 },
+        { mapel: "B. Indonesia", nilai: 90 },
+        { mapel: "B. Inggris", nilai: 70 },
+        { mapel: "PAI", nilai: 92 },
+        { mapel: "Tahfidz", nilai: 75 },
+        { mapel: "PKN", nilai: 84 },
+        { mapel: "PJOK", nilai: 95 },
+        { mapel: "Informatika", nilai: 88 },
+      ],
+      s11s2: [
+        { mapel: "Matematika", nilai: 95 }, 
+        { mapel: "B. Indonesia", nilai: 68 },
+        { mapel: "B. Inggris", nilai: 88 },
+        { mapel: "PAI", nilai: 65 },
+        { mapel: "Tahfidz", nilai: 90 },
+        { mapel: "PKN", nilai: 65 },
+        { mapel: "PJOK", nilai: 84 },
+        { mapel: "Informatika", nilai: 67 },
+      ],
+      s12s1: [
+        { mapel: "Matematika", nilai: 92 },
+        { mapel: "B. Indonesia", nilai: 94 },
+        { mapel: "B. Inggris", nilai: 89 },
+        { mapel: "PAI", nilai: 95 },
+        { mapel: "Tahfidz", nilai: 87 },
+        { mapel: "PKN", nilai: 90 },
+        { mapel: "PJOK", nilai: 93 },
+        { mapel: "Informatika", nilai: 91 },
+      ],
+      s12s2: [
+        { mapel: "Matematika", nilai: 65 }, 
+        { mapel: "B. Indonesia", nilai: 70 },
+        { mapel: "B. Inggris", nilai: 60 },
+        { mapel: "PAI", nilai: 85 },
+        { mapel: "Tahfidz", nilai: 68 },
+        { mapel: "PKN", nilai: 72 },
+        { mapel: "PJOK", nilai: 80 },
+        { mapel: "Informatika", nilai: 70 },
+      ],
+    }
+  },
 };
 
-const currentNis = localStorage.getItem('cognitia_nis');
-if (!currentNis || !studentsDB[currentNis]) {
-  window.location.href = 'index.html'; // Redirect to login if invalid
-}
-
+const currentNis = localStorage.getItem("cognitia_nis") || "242510010"; // Fallback agar jika diklik langsung tidak crash
 const dataSiswa = studentsDB[currentNis];
 
-// Colors matching the CSS variables — Natural Olive & Cream Palette
+// Variabel penampung data dinamis aktif awal (Default ke s12s2 sesuai setting class active HTML)
+let currentSemesterGrades = dataSiswa.semester_data["s12s2"] || [];
+
+// Menampung instance chart agar bisa di-destroy dengan aman tanpa error canvas tumpang tindih
+let gradesBarChartInstance = null;
+let pieChartInstance = null;
+let trendLineChartInstance = null;
+
 const colors = {
-  primary: '#89986D',
-  primaryLight: '#9CAB84',
-  secondary: '#C5D89D',
-  secondaryLight: '#D4E4B1',
-  purple: '#8B7355',
-  orange: '#B5944A',
-  teal: '#6B8F71',
-  pink: '#B07D6A',
-  gray: '#D8D0B4',
-  textMuted: '#6B7A54'
+  primary: "#6d9894",
+  primaryLight: "#84aba9",
+  secondary: "#9dc9d8",
+  secondaryLight: "#b1e3e4",
+  purple: "#7D6B91",
+  orange: "#D98A6C",
+  teal: "#6B8F71",
+  pink: "#C28CAE",
+  gray: "#D8D0B4",
+  textMuted: "#6B7A54",
 };
 
-const mapelColors = [colors.primary, colors.purple, colors.teal, colors.orange, colors.pink, '#7A9E7E', '#A89060', '#5F8A6A', '#C4A86E'];
+const mapelColors = [
+  colors.primary,
+  colors.purple,
+  colors.teal,
+  colors.orange,
+  colors.pink,
+  "#7FA99B",
+  "#5F8D8A",
+  "#7EA4B3",
+  "#A2B59F",
+];
 
-document.addEventListener('DOMContentLoaded', () => {
-  
+document.addEventListener("DOMContentLoaded", () => {
   // Loader Logic
-  const loader = document.getElementById('dashboard-loader');
-  const isJustLoggedIn = localStorage.getItem('cognitia_loading');
-  
-  if (isJustLoggedIn === 'true') {
-    // Show loader for 2 seconds to simulate fetching
-    loader.classList.remove('hidden');
+  const loader = document.getElementById("dashboard-loader");
+  const isJustLoggedIn = localStorage.getItem("cognitia_loading");
+
+  if (isJustLoggedIn === "true") {
+    loader.classList.remove("hidden");
     setTimeout(() => {
-      loader.classList.add('hidden');
-      localStorage.removeItem('cognitia_loading');
+      loader.classList.add("hidden");
+      localStorage.removeItem("cognitia_loading");
     }, 2000);
   } else if (loader) {
-    // Ensure hidden if not logged in just now
-    loader.classList.add('hidden');
+    loader.classList.add("hidden");
   }
 
-  // Set Current Date
-  const dateElement = document.getElementById('current-date');
+  // Dropdown Filter Custom Handler
+  const dropdownContainer = document.querySelector('.custom-dropdown-container');
+  const dropdownBtn = document.getElementById('semester-dropdown-btn');
+  const selectedSemesterText = document.getElementById('selected-semester');
+  const dropdownItems = document.querySelectorAll('.dropdown-item');
+
+  const filterElement = {
+    value: "s12s2",
+    dispatchEvent: function(event) {
+      if (this.onChangeCallback) this.onChangeCallback(event);
+    },
+    addEventListener: function(type, callback) {
+      if (type === 'change') this.onChangeCallback = callback;
+    }
+  };
+
+  if(dropdownBtn && dropdownContainer) {
+    dropdownBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dropdownContainer.classList.toggle('open');
+    });
+
+    dropdownItems.forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.stopPropagation();
+
+        const activeNow = document.querySelector('.dropdown-item.active');
+        if(activeNow) activeNow.classList.remove('active');
+        item.classList.add('active');
+
+        selectedSemesterText.textContent = item.textContent;
+        const selectedValue = item.getAttribute('data-value');
+        filterElement.value = selectedValue;
+
+        dropdownContainer.classList.remove('open');
+
+        console.log("Filter changed to:", filterElement.value);
+        handleFilterChange(filterElement.value);
+      });
+    });
+
+    document.addEventListener('click', () => {
+      dropdownContainer.classList.remove('open');
+    });
+  }
+
+  // Date Badge
+  const dateElement = document.getElementById("current-date");
   if (dateElement) {
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    dateElement.textContent = new Date().toLocaleDateString('id-ID', options);
+    const options = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
+    dateElement.textContent = new Date().toLocaleDateString("id-ID", options);
   }
 
   try {
-    // Dynamically replace any hardcoded 'Bima Sena' with actual student name
-    const allTextNodes = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
-    let node;
-    while ((node = allTextNodes.nextNode())) {
-      if (node.nodeValue.includes('Bima Sena')) {
-        node.nodeValue = node.nodeValue.replace(/Bima Sena/g, dataSiswa.nama);
-      }
-    }
+    // Inisialisasi Profil Siswa
+    if (document.getElementById("header-student-name"))
+      document.getElementById("header-student-name").textContent = dataSiswa.nama;
+    if (document.getElementById("sb-student-name"))
+      document.getElementById("sb-student-name").textContent = dataSiswa.nama;
+    if (document.getElementById("sb-avatar"))
+      document.getElementById("sb-avatar").textContent = dataSiswa.inisial;
+    if (document.getElementById("sb-class"))
+      document.getElementById("sb-class").textContent = dataSiswa.kelas;
 
-    // Set Student Name & Profile
-    if(document.getElementById('header-student-name')) document.getElementById('header-student-name').textContent = dataSiswa.nama;
-    if(document.getElementById('sb-student-name')) document.getElementById('sb-student-name').textContent = dataSiswa.nama;
-    if(document.getElementById('sb-avatar')) document.getElementById('sb-avatar').textContent = dataSiswa.inisial;
-    if(document.getElementById('sb-class')) document.getElementById('sb-class').textContent = dataSiswa.kelas;
-
-    // Initialize UI Features
     setupSidebar();
     setupNavigation();
-    
-    // Process Data & Render
-    calculateInsights();
-    renderSummaryTable();
-    renderGradesSection();
-    renderReportSection();
-    
-    // Render Charts
-    renderPieChart();
-    renderLeaderboard();
-    renderGradesBarChart();
-    renderTrendLineChart();
-    
-    // Handle Resize for charts
-    window.addEventListener('resize', () => {
+
+    // Render Awal Seluruh Komponen Dashboard
+    renderSummaryTable(); // Tabel rekap hanya di-render sekali karena merekam semua riwayat
+    refreshDashboardView();
+    renderTrendLineChart(); // Tren grafik garis tidak ikut terfilter karena merekam histori keseluruhan
+
+    window.addEventListener("resize", () => {
       if (Chart && Chart.instances) {
-        Object.values(Chart.instances).forEach(chart => {
-          if (chart && typeof chart.resize === 'function') chart.resize();
+        Object.values(Chart.instances).forEach((chart) => {
+          if (chart && typeof chart.resize === "function") chart.resize();
         });
       }
     });
   } catch (error) {
     console.error("Dashboard Rendering Error:", error);
-    alert("Terjadi kesalahan saat memuat data: " + error.message);
   }
 });
 
-// --- SIDEBAR & NAV LOGIC ---
+// --- FILTER ACTION MANAGER ---
+function handleFilterChange(selectedValue) {
+  // Update data array aktif yang digunakan fungsi pendukung
+  currentSemesterGrades = dataSiswa.semester_data[selectedValue] || [];
+
+  // Update tulisan sub info card rata-rata
+  const subAvgElement = document.querySelector("#card-avg .icard-sub");
+  if(subAvgElement) {
+    const activeItemTxt = document.querySelector('.dropdown-item[data-value="' + selectedValue + '"]')?.textContent;
+    subAvgElement.textContent = activeItemTxt || "Semester Terpilih";
+  }
+
+  // Kosongkan kontainer lama agar tidak menumpuk duplikat data teks
+  document.getElementById("grades-grid").innerHTML = "";
+  document.getElementById("report-grid").innerHTML = "";
+
+  // Gambar ulang layout & grafik
+  refreshDashboardView();
+}
+
+function refreshDashboardView() {
+  calculateInsights();
+  renderGradesSection();
+  renderReportSection();
+  renderLeaderboard();
+
+  // Render Grafik secara aman
+  renderGradesBarChart();
+  renderPieChart();
+}
+
+// --- SIDEBAR & NAVIGATION ---
 function setupSidebar() {
-  const sidebar = document.getElementById('sidebar');
-  const overlay = document.getElementById('sidebar-overlay');
-  const toggleBtn = document.getElementById('sidebar-toggle');
-  const closeBtn = document.getElementById('sidebar-close');
+  const sidebar = document.getElementById("sidebar");
+  const overlay = document.getElementById("sidebar-overlay");
+  const toggleBtn = document.getElementById("sidebar-toggle");
+  const closeBtn = document.getElementById("sidebar-close");
 
-  function openSidebar() {
-    sidebar.classList.add('active');
-    overlay.classList.add('active');
-  }
+  if(!sidebar || !overlay || !toggleBtn) return;
 
-  function closeSidebar() {
-    sidebar.classList.remove('active');
-    overlay.classList.remove('active');
-  }
+  toggleBtn.addEventListener("click", () => {
+    sidebar.classList.add("active");
+    overlay.classList.add("active");
+  });
 
-  toggleBtn.addEventListener('click', openSidebar);
-  closeBtn.addEventListener('click', closeSidebar);
-  overlay.addEventListener('click', closeSidebar);
+  const closeSidebar = () => {
+    sidebar.classList.remove("active");
+    overlay.classList.remove("active");
+  };
+
+  if(closeBtn) closeBtn.addEventListener("click", closeSidebar);
+  overlay.addEventListener("click", closeSidebar);
 }
 
 function setupNavigation() {
-  const sbLinks = document.querySelectorAll('.sidebar-link[data-section]');
-  const bnLinks = document.querySelectorAll('.bottom-nav-item[data-section]');
-  const sections = document.querySelectorAll('.dash-section');
+  const sbLinks = document.querySelectorAll(".sidebar-link[data-section]");
+  const bnLinks = document.querySelectorAll(".bottom-nav-item[data-section]");
+  const sections = document.querySelectorAll(".dash-section");
 
   function switchSection(sectionId) {
-    // Hide all sections
-    sections.forEach(sec => sec.classList.remove('active'));
-    // Show target section
-    document.getElementById('section-' + sectionId).classList.add('active');
+    sections.forEach((sec) => sec.classList.remove("active"));
+    const targetSection = document.getElementById("section-" + sectionId);
+    if(targetSection) targetSection.classList.add("active");
 
-    // Update active state on Sidebar
-    sbLinks.forEach(link => {
-      if(link.getAttribute('data-section') === sectionId) link.classList.add('active');
-      else link.classList.remove('active');
+    sbLinks.forEach((link) => {
+      if (link.getAttribute("data-section") === sectionId) link.classList.add("active");
+      else link.classList.remove("active");
     });
 
-    // Update active state on Bottom Nav
-    bnLinks.forEach(link => {
-      if(link.getAttribute('data-section') === sectionId) link.classList.add('active');
-      else link.classList.remove('active');
-    });
-    
-    // Auto close sidebar on mobile
-    if(window.innerWidth < 992) {
-      document.getElementById('sidebar').classList.remove('active');
-      document.getElementById('sidebar-overlay').classList.remove('active');
+    if (window.innerWidth < 992) {
+      document.getElementById("sidebar").classList.remove("active");
+      document.getElementById("sidebar-overlay").classList.remove("active");
     }
   }
 
-  sbLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
+  sbLinks.forEach((link) => {
+    link.addEventListener("click", (e) => {
       e.preventDefault();
-      switchSection(link.getAttribute('data-section'));
-    });
-  });
-
-  bnLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      switchSection(link.getAttribute('data-section'));
+      switchSection(link.getAttribute("data-section"));
     });
   });
 }
 
-// --- DATA PROCESSING ---
+// --- DATA LIST GENERATORS ---
 function calculateInsights() {
-  const grades = dataSiswa.detail_nilai;
-  const history = dataSiswa.perkembangan_semester;
+  const grades = currentSemesterGrades;
   
-  // Highest Grade
+  if(!grades || grades.length === 0) {
+    document.getElementById("val-highest").textContent = "—";
+    document.getElementById("mapel-highest").textContent = "Data Kosong";
+    document.getElementById("val-lowest").textContent = "—";
+    document.getElementById("mapel-lowest").textContent = "Data Kosong";
+    document.getElementById("val-avg").textContent = "0";
+    document.getElementById("val-subjects").textContent = "0";
+    return;
+  }
+
   let highest = grades[0];
   let lowest = grades[0];
   let total = 0;
 
-  grades.forEach(g => {
+  grades.forEach((g) => {
     if (g.nilai > highest.nilai) highest = g;
     if (g.nilai < lowest.nilai) lowest = g;
     total += g.nilai;
   });
 
-  const avgNow = (total / grades.length).toFixed(1);
-
-  // Update UI Cards
-  document.getElementById('val-highest').textContent = highest.nilai;
-  document.getElementById('mapel-highest').textContent = highest.mapel;
-  
-  document.getElementById('val-lowest').textContent = lowest.nilai;
-  document.getElementById('mapel-lowest').textContent = lowest.mapel;
-  
-  document.getElementById('val-avg').textContent = avgNow;
-  
-  document.getElementById('val-subjects').textContent = grades.length;
+  document.getElementById("val-highest").textContent = highest.nilai;
+  document.getElementById("mapel-highest").textContent = highest.mapel;
+  document.getElementById("val-lowest").textContent = lowest.nilai;
+  document.getElementById("mapel-lowest").textContent = lowest.mapel;
+  document.getElementById("val-avg").textContent = (total / grades.length).toFixed(1);
+  document.getElementById("val-subjects").textContent = grades.length;
 }
 
 function renderSummaryTable() {
-  const tbody = document.getElementById('summary-table-body');
-  const history = dataSiswa.perkembangan_semester;
+  const tbody = document.getElementById("summary-table-body");
+  if(!tbody) return;
+  tbody.innerHTML = "";
   
-  history.forEach(item => {
-    let badgeClass = 'fair';
-    let ket = 'Cukup';
-    
-    if(item.rata_rata >= 90) { badgeClass = 'excellent'; ket = 'Sangat Baik'; }
-    else if(item.rata_rata >= 85) { badgeClass = 'good'; ket = 'Baik'; }
-    
-    const tr = document.createElement('tr');
+  dataSiswa.perkembangan_semester.forEach((item) => {
+    let badgeClass = "fair";
+    let ket = "Cukup";
+    if (item.rata_rata >= 90) {
+      badgeClass = "excellent";
+      ket = "Sangat Baik";
+    } else if (item.rata_rata >= 85) {
+      badgeClass = "good";
+      ket = "Baik";
+    }
+    const tr = document.createElement("tr");
     tr.innerHTML = `
       <td>${item.semester}</td>
       <td><strong>${item.rata_rata}</strong></td>
@@ -258,14 +429,13 @@ function renderSummaryTable() {
 }
 
 function renderGradesSection() {
-  const container = document.getElementById('grades-grid');
-  const grades = dataSiswa.detail_nilai;
-  
-  grades.forEach((g, index) => {
+  const container = document.getElementById("grades-grid");
+  if(!container) return;
+
+  currentSemesterGrades.forEach((g, index) => {
     const color = mapelColors[index % mapelColors.length];
-    
-    const card = document.createElement('div');
-    card.className = 'subject-card';
+    const card = document.createElement("div");
+    card.className = "subject-card";
     card.innerHTML = `
       <div class="scard-header">
         <span class="scard-title">${g.mapel}</span>
@@ -275,20 +445,19 @@ function renderGradesSection() {
         <div class="scard-progress-fill" style="width: ${g.nilai}%; background-color: ${color};"></div>
       </div>
     `;
-    container.appendChild(tr = card); // intentional minor trick to append
+    container.appendChild(card);
   });
 }
 
 function renderReportSection() {
-  const container = document.getElementById('report-grid');
-  const grades = dataSiswa.detail_nilai;
-  
-  grades.forEach((g, index) => {
+  const container = document.getElementById("report-grid");
+  if(!container) return;
+
+  currentSemesterGrades.forEach((g, index) => {
     const color = mapelColors[index % mapelColors.length];
-    let desc = g.nilai >= 85 ? 'Pencapaian sangat memuaskan, pertahankan!' : 'Perlu ditingkatkan lagi pada semester berikutnya.';
-    
-    const card = document.createElement('div');
-    card.className = 'subject-card';
+    let desc = g.nilai >= 85 ? "Pencapaian sangat memuaskan, pertahankan!" : "Perlu ditingkatkan lagi pada semester berikutnya.";
+    const card = document.createElement("div");
+    card.className = "subject-card";
     card.style.borderLeft = `4px solid ${color}`;
     card.innerHTML = `
       <div class="scard-header">
@@ -301,125 +470,94 @@ function renderReportSection() {
   });
 }
 
+function renderLeaderboard() {
+  const container = document.getElementById("leaderboard-list");
+  if(!container) return;
+  container.innerHTML = ""; 
+
+  const sorted = [...currentSemesterGrades].sort((a, b) => b.nilai - a.nilai);
+  const top3 = sorted.slice(0, 3); // Mengambil peringkat 3 besar teratas
+
+  top3.forEach((g, idx) => {
+    const medali = ["🥇", "🥈", "🥉"];
+    const item = document.createElement("div");
+    item.className = "flex items-center justify-between p-2 mb-2 rounded bg-stone-50 border border-stone-100";
+    item.innerHTML = `
+      <div class="flex items-center gap-2">
+        <span class="text-lg">${medali[idx]}</span>
+        <span class="font-medium text-stone-700">${g.mapel}</span>
+      </div>
+      <span class="font-bold text-teal-700">${g.nilai}</span>
+    `;
+    container.appendChild(item);
+  });
+}
+
 // --- CHART.JS CONFIGURATIONS ---
-
-// Global Defaults
 Chart.defaults.font.family = "'Inter', sans-serif";
-Chart.defaults.color = '#6B7A54';
-Chart.defaults.plugins.tooltip.padding = 10;
-Chart.defaults.plugins.tooltip.backgroundColor = 'rgba(61, 74, 46, 0.9)';
-Chart.defaults.plugins.tooltip.titleFont = { size: 13, family: "'Plus Jakarta Sans'" };
-Chart.defaults.plugins.tooltip.bodyFont = { size: 14, weight: 'bold' };
+Chart.defaults.color = "#6B7A54";
 
-function renderBarChart() {
-  const ctx = document.getElementById('barChart').getContext('2d');
-  const labels = dataSiswa.detail_nilai.map(g => g.mapel);
-  const data = dataSiswa.detail_nilai.map(g => g.nilai);
+function renderGradesBarChart() {
+  const canvasEl = document.getElementById("gradesBarChart");
+  if(!canvasEl) return;
+  const ctx = canvasEl.getContext("2d");
 
-  new Chart(ctx, {
-    type: 'bar',
+  // Destroy instance lama jika ada, mencegah glitch penumpukan Chart.js
+  if (gradesBarChartInstance) {
+    gradesBarChartInstance.destroy();
+  }
+
+  const labels = currentSemesterGrades.map((g) => g.mapel);
+  const data = currentSemesterGrades.map((g) => g.nilai);
+
+  gradesBarChartInstance = new Chart(ctx, {
+    type: "bar",
     data: {
       labels: labels,
-      datasets: [{
-        label: 'Nilai Semester Ini',
-        data: data,
-        backgroundColor: mapelColors,
-        borderRadius: 6,
-        barPercentage: 0.6
-      }]
+      datasets: [
+        {
+          label: "Nilai Siswa",
+          data: data,
+          backgroundColor: mapelColors,
+          borderRadius: 6,
+          barPercentage: 0.6,
+        },
+      ],
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false }
-      },
+      plugins: { legend: { display: false } },
       scales: {
-        y: {
-          beginAtZero: true,
-          max: 100,
-          grid: { color: 'rgba(216, 208, 180, 0.5)', drawBorder: false }
-        },
-        x: { grid: { display: false, drawBorder: false } }
-      }
-    }
-  });
-}
-
-function renderLineChart() {
-  const ctx = document.getElementById('lineChart').getContext('2d');
-  const labels = dataSiswa.perkembangan_semester.map(h => h.semester);
-  const data = dataSiswa.perkembangan_semester.map(h => h.rata_rata);
-
-  const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-  gradient.addColorStop(0, 'rgba(197, 216, 157, 0.4)');
-  gradient.addColorStop(1, 'rgba(197, 216, 157, 0.0)');
-
-  new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: labels,
-      datasets: [{
-        label: 'Rata-rata Nilai',
-        data: data,
-        borderColor: colors.secondary,
-        backgroundColor: gradient,
-        borderWidth: 3,
-        pointBackgroundColor: '#FFFDF5',
-        pointBorderColor: colors.secondary,
-        pointBorderWidth: 2,
-        pointRadius: 5,
-        pointHoverRadius: 7,
-        fill: true,
-        tension: 0.4 // Smooth curve
-      }]
+        y: { beginAtZero: true, max: 100, grid: { color: "rgba(137, 152, 109, 0.1)" } },
+        x: { grid: { display: false } },
+      },
     },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false }
-      },
-      scales: {
-        y: {
-          min: 70, max: 100,
-          grid: { color: 'rgba(216, 208, 180, 0.5)' }
-        },
-        x: { grid: { display: false } }
-      }
-    }
   });
 }
-
-const mapelColorsAll = [
-  colors.primary,    // #89986D
-  colors.orange,     // #B5944A
-  colors.teal,       // #6B8F71
-  colors.purple,     // #8B7355
-  colors.pink,       // #B07D6A
-  '#7A9E7E',
-  '#A89060',
-  '#5F8A6A',
-  '#C4A86E'
-];
 
 function renderPieChart() {
-  const ctx = document.getElementById('pieChart').getContext('2d');
-  const grades = dataSiswa.detail_nilai;
-  const labels = grades.map(g => g.mapel);
-  const data = grades.map(g => g.nilai);
-  const bgColors = grades.map((_, i) => mapelColorsAll[i % mapelColorsAll.length]);
+  const canvasEl = document.getElementById("pieChart");
+  if(!canvasEl) return;
+  const ctx = canvasEl.getContext("2d");
 
-  // Build custom legend list (always visible, works on mobile too)
-  const legendEl = document.getElementById('pie-legend-list');
+  if (pieChartInstance) {
+    pieChartInstance.destroy();
+  }
+
+  const labels = currentSemesterGrades.map((g) => g.mapel);
+  const data = currentSemesterGrades.map((g) => g.nilai);
+
+  const legendEl = document.getElementById("pie-legend-list");
   if (legendEl) {
-    legendEl.innerHTML = '';
-    grades.forEach((g, i) => {
-      const color = bgColors[i];
+    legendEl.innerHTML = "";
+    currentSemesterGrades.forEach((g, i) => {
+      const color = mapelColors[i % mapelColors.length];
       const total = data.reduce((a, b) => a + b, 0);
-      const pct = ((g.nilai / total) * 100).toFixed(1);
-      const item = document.createElement('div');
-      item.className = 'pie-legend-item';
+      const pct = total > 0 ? ((g.nilai / total) * 100).toFixed(1) : 0;
+      
+      const item = document.createElement("div");
+      item.className = "pie-legend-item";
       item.innerHTML = `
         <span class="pie-legend-dot" style="background:${color};"></span>
         <span class="pie-legend-name">${g.mapel}</span>
@@ -430,171 +568,57 @@ function renderPieChart() {
     });
   }
 
-  new Chart(ctx, {
-    type: 'pie',
+  pieChartInstance = new Chart(ctx, {
+    type: "pie",
     data: {
       labels: labels,
-      datasets: [{
-        label: 'Nilai',
-        data: data,
-        backgroundColor: bgColors,
-        borderWidth: 2,
-        borderColor: '#FFFDF5',
-        hoverOffset: 10
-      }]
+      datasets: [{ data: data, backgroundColor: mapelColors, borderWidth: 2, borderColor: "#FFFDF5" }],
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          enabled: true,
-          backgroundColor: 'rgba(45, 56, 32, 0.97)',
-          titleColor: '#FFFDF5',
-          bodyColor: '#C5D89D',
-          borderColor: '#89986D',
-          borderWidth: 1,
-          padding: 12,
-          cornerRadius: 8,
-          displayColors: true,
-          callbacks: {
-            title: function(items) {
-              return items[0].label;
-            },
-            label: function(context) {
-              const total = context.dataset.data.reduce((a, b) => a + b, 0);
-              const pct = ((context.raw / total) * 100).toFixed(1);
-              return `  Nilai: ${context.raw}  (${pct}%)`;
-            }
-          }
-        }
-      }
-    }
-  });
-}
-
-function renderLeaderboard() {
-  const container = document.getElementById('leaderboard-list');
-  if (!container) return;
-
-  const top5 = [...dataSiswa.detail_nilai]
-    .sort((a, b) => b.nilai - a.nilai)
-    .slice(0, 5);
-
-  const medals = ['🥇', '🥈', '🥉', '', ''];
-  const rankColors = [
-    { bg: 'rgba(181,148,74,0.12)', border: '#B5944A', text: '#8B6914' },
-    { bg: 'rgba(160,160,160,0.12)', border: '#A0A0A0', text: '#666' },
-    { bg: 'rgba(160,100,60,0.12)', border: '#A0643C', text: '#7A4020' },
-    { bg: 'rgba(137,152,109,0.08)', border: 'var(--border-light)', text: 'var(--text-muted)' },
-    { bg: 'rgba(137,152,109,0.08)', border: 'var(--border-light)', text: 'var(--text-muted)' }
-  ];
-
-  function getStars(nilai) {
-    let stars = 0;
-    if (nilai >= 95) stars = 5;
-    else if (nilai >= 88) stars = 4;
-    else if (nilai >= 80) stars = 3;
-    else if (nilai >= 70) stars = 2;
-    else stars = 1;
-    return stars;
-  }
-
-  function renderStars(stars) {
-    let html = '';
-    for (let i = 1; i <= 5; i++) {
-      html += `<svg width="14" height="14" viewBox="0 0 24 24" fill="${i <= stars ? '#B5944A' : 'none'}" stroke="${i <= stars ? '#B5944A' : '#C5B898'}" stroke-width="2" style="flex-shrink:0"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>`;
-    }
-    return html;
-  }
-
-  container.innerHTML = '';
-  top5.forEach((item, i) => {
-    const c = rankColors[i];
-    const stars = getStars(item.nilai);
-    const row = document.createElement('div');
-    row.className = 'lb-row';
-    row.style.cssText = `
-      display: flex; align-items: center; gap: 12px;
-      padding: 12px 14px; margin-bottom: 10px;
-      background: ${c.bg}; border: 1px solid ${c.border};
-      border-radius: 12px; transition: transform 0.15s, box-shadow 0.15s;
-    `;
-    row.onmouseenter = () => { row.style.transform = 'translateY(-2px)'; row.style.boxShadow = '0 4px 14px rgba(0,0,0,0.08)'; };
-    row.onmouseleave = () => { row.style.transform = ''; row.style.boxShadow = ''; };
-
-    row.innerHTML = `
-      <!-- Rank -->
-      <div style="width:36px; text-align:center; font-size:${medals[i] ? '1.4rem' : '1rem'}; font-weight:800; color:${c.text}; flex-shrink:0;">
-        ${medals[i] || (i + 1)}
-      </div>
-      <!-- Avatar -->
-      <div style="width:40px; height:40px; border-radius:50%; background:${mapelColorsAll[i % mapelColorsAll.length]}; display:flex; align-items:center; justify-content:center; flex-shrink:0; color:#fff; font-weight:700; font-size:0.9rem;">
-        ${item.mapel.slice(0,2).toUpperCase()}
-      </div>
-      <!-- Name + Stars -->
-      <div style="flex:1; min-width:0;">
-        <div style="font-weight:700; font-size:0.95rem; color:var(--text-dark); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${item.mapel}</div>
-        <div style="display:flex; gap:2px; margin-top:3px;">${renderStars(stars)}</div>
-      </div>
-      <!-- Score -->
-      <div style="font-size:1.1rem; font-weight:800; font-family:var(--font-display); color:${c.text}; flex-shrink:0;">${item.nilai}</div>
-    `;
-    container.appendChild(row);
-  });
-}
-
-function renderGradesBarChart() {
-  // Duplikat Grafik Untuk Bagian Grades
-  const ctx = document.getElementById('gradesBarChart').getContext('2d');
-  const labels = dataSiswa.detail_nilai.map(g => g.mapel);
-  const data = dataSiswa.detail_nilai.map(g => g.nilai);
-
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: labels,
-      datasets: [{
-        label: 'Nilai',
-        data: data,
-        backgroundColor: mapelColors,
-        borderRadius: 4
-      }]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
       plugins: { legend: { display: false } },
-      scales: { y: { beginAtZero: true, max: 100 } }
-    }
+    },
   });
 }
 
 function renderTrendLineChart() {
-  // Duplikat Grafik Untuk Bagian Trend
-  const ctx = document.getElementById('trendLineChart').getContext('2d');
-  const labels = dataSiswa.perkembangan_semester.map(h => h.semester);
-  const data = dataSiswa.perkembangan_semester.map(h => h.rata_rata);
+  const canvasEl = document.getElementById("trendLineChart");
+  if(!canvasEl) return;
+  const ctx = canvasEl.getContext("2d");
 
-  new Chart(ctx, {
-    type: 'line',
+  const labels = dataSiswa.perkembangan_semester.map((h) => h.semester);
+  const data = dataSiswa.perkembangan_semester.map((h) => h.rata_rata);
+
+  if (trendLineChartInstance) {
+    trendLineChartInstance.destroy();
+  }
+
+  trendLineChartInstance = new Chart(ctx, {
+    type: "line",
     data: {
       labels: labels,
-      datasets: [{
-        label: 'Rata-rata',
-        data: data,
-        borderColor: colors.primary,
-        backgroundColor: 'rgba(30, 64, 175, 0.1)',
-        borderWidth: 3,
-        pointBackgroundColor: colors.primary,
-        fill: true,
-        tension: 0.3
-      }]
+      datasets: [
+        {
+          label: "Rata-rata",
+          data: data,
+          borderColor: colors.primary,
+          backgroundColor: "rgba(109, 152, 148, 0.1)",
+          borderWidth: 3,
+          pointBackgroundColor: colors.primary,
+          fill: true,
+          tension: 0.3,
+        },
+      ],
     },
     options: {
-      responsive: true, maintainAspectRatio: false,
+      responsive: true,
+      maintainAspectRatio: false,
       plugins: { legend: { display: false } },
-      scales: { y: { min: 70, max: 100 } }
-    }
+      scales: { 
+        y: { min: 70, max: 100, grid: { color: "rgba(137, 152, 109, 0.1)" } },
+        x: { grid: { display: false } }
+      },
+    },
   });
 }

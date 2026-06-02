@@ -120,6 +120,24 @@
         <p class="dash-subtitle">Selamat datang — pantau perkembangan <strong id="header-student-name">Bima Sena</strong> di sini.</p>
       </div>
       <div class="dash-header-right">
+        <div class="custom-dropdown-container">
+          <div class="date-badge" id="semester-dropdown-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+
+            <span id="selected-semester">Semester Ini</span>
+            <svg class="chevron-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+
+          <ul class="custom-dropdown-menu" id="semester-options">
+            <li class="dropdown-item active" data-value="s12s2">Kelas 12 S2</li>
+            <li class="dropdown-item" data-value="s12s1">Kelas 12 S1</li>
+            <li class="dropdown-item" data-value="s11s2">Kelas 11 S2</li>
+            <li class="dropdown-item" data-value="s11s1">Kelas 11 S1</li>
+            <li class="dropdown-item" data-value="s10s2">Kelas 10 S2</li>
+            <li class="dropdown-item" data-value="s10s1">Kelas 10 S1</li>
+          </ul>
+        </div>
+        
         <div class="date-badge" id="date-badge">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
           <span id="current-date">Memuat...</span>
