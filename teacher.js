@@ -33,17 +33,17 @@ const studentsData = [
 const subjects = ["Matematika", "B. Indonesia", "B. Inggris", "PAI", "Tahfidz", "PKK", "PKN", "PJOK", "Informatika"];
 
 const colors = {
-  primary: '#89986D',
-  primaryLight: '#9CAB84',
-  secondary: '#C5D89D',
-  secondaryLight: '#D4E4B1',
-  purple: '#8B7355',
-  orange: '#B5944A',
-  teal: '#6B8F71',
-  pink: '#B07D6A',
-  gray: '#D8D0B4',
-  textMuted: '#6B7A54',
-  accentRed: '#B85C5C'
+  primary: '#3B82F6',
+  primaryLight: '#60A5FA',
+  secondary: '#93C5FD',
+  secondaryLight: '#DBEAFE',
+  purple: '#8B5CF6',
+  orange: '#F59E0B',
+  teal: '#10B981',
+  pink: '#EC4899',
+  gray: '#94A3B8',
+  textMuted: '#64748B',
+  accentRed: '#EF4444'
 };
 
 const mapelColors = [colors.primary, colors.purple, colors.teal, colors.orange, colors.pink, colors.secondary, colors.primaryLight, colors.purple, colors.teal];
@@ -184,14 +184,36 @@ function renderDashboardCharts(stats) {
         label: 'Rata-rata Kelas',
         data: subjects.map(s => stats.subjectAverages[s]),
         backgroundColor: mapelColors,
-        borderRadius: 6
+        borderRadius: 8,
+        barThickness: 20
       }]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      plugins: { legend: { display: false } },
-      scales: { y: { beginAtZero: true, max: 100 } }
+      plugins: { 
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: 'rgba(30, 41, 59, 0.95)',
+          titleFont: { family: 'Plus Jakarta Sans', size: 13, weight: '700' },
+          bodyFont: { family: 'Plus Jakarta Sans', size: 12 },
+          padding: 10,
+          cornerRadius: 8,
+          displayColors: false
+        }
+      },
+      scales: { 
+        y: { 
+          beginAtZero: true, 
+          max: 100,
+          grid: { color: '#F1F5F9', drawBorder: false },
+          ticks: { font: { family: 'Plus Jakarta Sans', size: 11 }, color: '#94A3B8' }
+        },
+        x: {
+          grid: { display: false },
+          ticks: { font: { family: 'Plus Jakarta Sans', size: 11 }, color: '#64748B' }
+        }
+      }
     }
   });
 
@@ -204,17 +226,46 @@ function renderDashboardCharts(stats) {
       datasets: [{
         label: 'Rata-rata Kelas',
         data: stats.semesterAverages,
-        borderColor: colors.primary,
-        backgroundColor: 'rgba(137, 152, 109, 0.1)',
+        borderColor: '#2563EB',
+        borderWidth: 3,
+        pointBackgroundColor: '#FFFFFF',
+        pointBorderColor: '#2563EB',
+        pointBorderWidth: 2,
+        pointHoverRadius: 6,
+        pointHoverBackgroundColor: '#2563EB',
+        pointHoverBorderColor: '#FFFFFF',
+        pointHoverBorderWidth: 2,
+        backgroundColor: 'rgba(37, 99, 235, 0.04)',
         fill: true,
-        tension: 0.4
+        tension: 0.35
       }]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      plugins: { legend: { display: false } },
-      scales: { y: { min: 70, max: 100 } }
+      plugins: { 
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: 'rgba(30, 41, 59, 0.95)',
+          titleFont: { family: 'Plus Jakarta Sans', size: 13, weight: '700' },
+          bodyFont: { family: 'Plus Jakarta Sans', size: 12 },
+          padding: 10,
+          cornerRadius: 8,
+          displayColors: false
+        }
+      },
+      scales: { 
+        y: { 
+          min: 70, 
+          max: 100,
+          grid: { color: '#F1F5F9', drawBorder: false },
+          ticks: { font: { family: 'Plus Jakarta Sans', size: 11 }, color: '#94A3B8' }
+        },
+        x: {
+          grid: { display: false },
+          ticks: { font: { family: 'Plus Jakarta Sans', size: 11 }, color: '#64748B' }
+        }
+      }
     }
   });
 
@@ -254,7 +305,7 @@ function renderDashboardCharts(stats) {
         data: pieData.map(d => d.avg),
         backgroundColor: pieData.map(d => d.color),
         borderWidth: 2,
-        borderColor: '#FFFDF5',
+        borderColor: '#FFFFFF',
         hoverOffset: 10
       }]
     },
@@ -265,10 +316,10 @@ function renderDashboardCharts(stats) {
         legend: { display: false },
         tooltip: {
           enabled: true,
-          backgroundColor: 'rgba(45, 56, 32, 0.97)',
-          titleColor: '#FFFDF5',
-          bodyColor: '#C5D89D',
-          borderColor: '#89986D',
+          backgroundColor: 'rgba(30, 41, 59, 0.97)',
+          titleColor: '#FFFFFF',
+          bodyColor: '#93C5FD',
+          borderColor: '#3B82F6',
           borderWidth: 1,
           padding: 12,
           cornerRadius: 8,
@@ -373,14 +424,36 @@ function renderDetailBarChart(student) {
         label: 'Nilai Siswa',
         data: subjects.map(s => student.grades[s]),
         backgroundColor: mapelColors,
-        borderRadius: 4
+        borderRadius: 8,
+        barThickness: 20
       }]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      plugins: { legend: { display: false } },
-      scales: { y: { beginAtZero: true, max: 100 } }
+      plugins: { 
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: 'rgba(30, 41, 59, 0.95)',
+          titleFont: { family: 'Plus Jakarta Sans', size: 13, weight: '700' },
+          bodyFont: { family: 'Plus Jakarta Sans', size: 12 },
+          padding: 10,
+          cornerRadius: 8,
+          displayColors: false
+        }
+      },
+      scales: { 
+        y: { 
+          beginAtZero: true, 
+          max: 100,
+          grid: { color: '#F1F5F9', drawBorder: false },
+          ticks: { font: { family: 'Plus Jakarta Sans', size: 11 }, color: '#94A3B8' }
+        },
+        x: {
+          grid: { display: false },
+          ticks: { font: { family: 'Plus Jakarta Sans', size: 11 }, color: '#64748B' }
+        }
+      }
     }
   });
 }
@@ -419,7 +492,7 @@ function renderDetailReports(student) {
         <span class="scard-title">${s}</span>
         <span class="scard-score">${score}</span>
       </div>
-      <p style="font-size:0.875rem; color:#6B7A54; margin-top:0.5rem;">${desc}</p>
+      <p style="font-size:0.875rem; color:#64748B; margin-top:0.5rem;">${desc}</p>
     `;
     grid.appendChild(card);
   });
@@ -441,7 +514,7 @@ function renderRanking() {
   podiumContainer.innerHTML = visualTop5.map((s, i) => {
     const rank = rankedStudents.indexOf(s) + 1;
     const heights = { 1: '80%', 2: '70%', 3: '60%', 4: '50%', 5: '40%' };
-    const colors = { 1: '#FFD700', 2: '#C0C0C0', 3: '#CD7F32', 4: '#9CAB84', 5: '#D8D0B4' };
+    const colors = { 1: '#FFD700', 2: '#C0C0C0', 3: '#CD7F32', 4: '#60A5FA', 5: '#94A3B8' };
     return `
       <div class="podium-item" style="height: ${heights[rank]}">
         <span class="podium-rank">${rank}</span>
