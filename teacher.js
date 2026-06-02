@@ -79,6 +79,18 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('student-detail-panel').style.display = 'none';
     document.getElementById('student-cards-grid').style.display = 'grid';
   });
+
+  // Scroll-reveal Intersection Observer
+  const animateElements = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  animateElements.forEach(el => observer.observe(el));
 });
 
 function setupSidebar() {
@@ -365,7 +377,7 @@ function renderStudentCards() {
   studentsData.forEach(student => {
     const avg = (subjects.reduce((sum, s) => sum + student.grades[s], 0) / subjects.length).toFixed(1);
     const card = document.createElement('div');
-    card.className = 'student-card';
+    card.className = 'student-card reveal';
     card.innerHTML = `
       <div class="scard-header">
         <div class="scard-avatar">${student.nama.split(' ').map(n => n[0]).join('')}</div>
@@ -464,7 +476,7 @@ function renderDetailGrades(student) {
   subjects.forEach((s, i) => {
     const score = student.grades[s];
     const card = document.createElement('div');
-    card.className = 'subject-card';
+    card.className = 'subject-card reveal visible'; // add visible immediately since detail view doesn't scroll much initially
     card.innerHTML = `
       <div class="scard-header">
         <span class="scard-title">${s}</span>
@@ -484,7 +496,7 @@ function renderDetailReports(student) {
   subjects.forEach((s, i) => {
     const score = student.grades[s];
     const card = document.createElement('div');
-    card.className = 'subject-card';
+    card.className = 'subject-card reveal visible'; // add visible immediately
     card.style.borderLeft = `4px solid ${mapelColors[i]}`;
     const desc = score >= 85 ? "Sangat Memuaskan. Pertahankan prestasimu!" : (score >= 75 ? "Hasil cukup baik. Tingkatkan lagi di semester depan." : "Perlu bimbingan lebih lanjut.");
     card.innerHTML = `
