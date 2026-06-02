@@ -96,16 +96,19 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Contact Modal Logic
-  const contactBtn = document.getElementById('nav-contact-btn');
+  const contactBtns = document.querySelectorAll('#nav-contact-btn, #mobile-contact-btn');
   const contactModal = document.getElementById('contact-modal');
   const modalClose = document.getElementById('modal-close');
   const modalTabs = document.querySelectorAll('.modal-tab');
   const tabPanes = document.querySelectorAll('.tab-pane');
 
-  if (contactBtn && contactModal) {
-    contactBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      contactModal.classList.add('active');
+  if (contactBtns.length > 0 && contactModal) {
+    contactBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        contactModal.classList.add('active');
+        closeMobileMenu();
+      });
     });
 
     modalClose.addEventListener('click', () => {
