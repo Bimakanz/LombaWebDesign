@@ -5,27 +5,50 @@ document.addEventListener('DOMContentLoaded', () => {
   const navbar = document.getElementById('navbar');
   
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
+    if (navbar) {
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
     }
   });
 
   // Mobile Menu Toggle
   const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobile-menu');
+  const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
   
-  hamburger.addEventListener('click', () => {
-    mobileMenu.classList.toggle('open');
-  });
+  function toggleMobileMenu() {
+    if (mobileMenu) mobileMenu.classList.toggle('open');
+    if (hamburger) hamburger.classList.toggle('open');
+    if (navbar) navbar.classList.toggle('menu-open');
+    if (mobileMenuOverlay) {
+      mobileMenuOverlay.classList.toggle('open');
+    }
+  }
+
+  function closeMobileMenu() {
+    if (mobileMenu) mobileMenu.classList.remove('open');
+    if (hamburger) hamburger.classList.remove('open');
+    if (navbar) navbar.classList.remove('menu-open');
+    if (mobileMenuOverlay) {
+      mobileMenuOverlay.classList.remove('open');
+    }
+  }
+
+  if (hamburger) {
+    hamburger.addEventListener('click', toggleMobileMenu);
+  }
+
+  if (mobileMenuOverlay) {
+    mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+  }
 
   // Close mobile menu when a link is clicked
   const mobileLinks = document.querySelectorAll('.mobile-link');
   mobileLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      mobileMenu.classList.remove('open');
-    });
+    link.addEventListener('click', closeMobileMenu);
   });
 
   // Smooth Scrolling for Anchor Links
@@ -173,67 +196,46 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Theme Toggle Logic with View Transition Spread Effect
-  const themeToggleBtn = document.getElementById('theme-toggle');
-  const moonIcon = document.getElementById('moon-icon');
-  const sunIcon = document.getElementById('sun-icon');
-
-  if (themeToggleBtn) {
-    // Check saved theme
-    const savedTheme = localStorage.getItem('cognitia_theme') || 'light';
-    if (savedTheme === 'dark') {
-      document.documentElement.setAttribute('data-theme', 'dark');
-      moonIcon.style.display = 'none';
-      sunIcon.style.display = 'block';
-    }
-
-    themeToggleBtn.addEventListener('click', (e) => {
-      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  // Stats Count Up Animation
+  const statsSection = document.querySelector('.stats-banner');
+  const statNumbers = document.querySelectorAll('.stat-number');
+  
+  if (statsSection && statNumbers.length > 0) {
+    let animated = false;
+    
+    const countUp = (element) => {
+      const target = parseInt(element.getAttribute('data-target'), 10);
+      const suffix = element.getAttribute('data-suffix') || '';
+      const duration = 1500; // ms
+      const startTime = performance.now();
       
-      const toggleTheme = () => {
-        if (isDark) {
-          document.documentElement.removeAttribute('data-theme');
-          localStorage.setItem('cognitia_theme', 'light');
-          moonIcon.style.display = 'block';
-          sunIcon.style.display = 'none';
+      const updateNumber = (currentTime) => {
+        const elapsedTime = currentTime - startTime;
+        if (elapsedTime >= duration) {
+          element.textContent = target + suffix;
         } else {
-          document.documentElement.setAttribute('data-theme', 'dark');
-          localStorage.setItem('cognitia_theme', 'dark');
-          moonIcon.style.display = 'none';
-          sunIcon.style.display = 'block';
+          const progress = elapsedTime / duration;
+          // Ease-out quad formula for smooth decelerating animation
+          const easeProgress = progress * (2 - progress);
+          const currentValue = Math.floor(easeProgress * target);
+          element.textContent = currentValue + suffix;
+          requestAnimationFrame(updateNumber);
         }
       };
-
-      if (!document.startViewTransition) {
-        toggleTheme();
-        return;
-      }
-
-      // Get click coordinates for the spread effect origin
-      const x = e.clientX;
-      const y = e.clientY;
-      const endRadius = Math.hypot(
-        Math.max(x, innerWidth - x),
-        Math.max(y, innerHeight - y)
-      );
-
-      const transition = document.startViewTransition(toggleTheme);
-
-      transition.ready.then(() => {
-        const clipPath = [
-          `circle(0px at ${x}px ${y}px)`,
-          `circle(${endRadius}px at ${x}px ${y}px)`
-        ];
-        
-        document.documentElement.animate(
-          { clipPath: clipPath },
-          {
-            duration: 500,
-            easing: 'ease-in',
-            pseudoElement: '::view-transition-new(root)'
-          }
-        );
+      
+      requestAnimationFrame(updateNumber);
+    };
+    
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !animated) {
+          animated = true;
+          statNumbers.forEach(num => countUp(num));
+          statsObserver.unobserve(entry.target);
+        }
       });
-    });
+    }, { threshold: 0.2 });
+    
+    statsObserver.observe(statsSection);
   }
 });

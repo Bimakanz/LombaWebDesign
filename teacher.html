@@ -8,7 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="logo.png" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
 
@@ -406,30 +407,33 @@
     </div>
   </div>
 
+  <!-- ===== MOBILE TOP BAR ===== -->
+  <div class="mobile-topbar" id="mobile-topbar">
+    <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle Sidebar">
+      <span></span><span></span><span></span>
+    </button>
+    <a href="index.html" class="nav-logo">
+      <div class="logo-icon">
+        <img src="logo.png" alt="Cognitia Logo" style="width: 24px; height: 24px; object-fit: contain;" />
+      </div>
+      <span class="logo-text">Cognitia</span>
+    </a>
+    <div style="width:40px"></div>
+  </div>
+
   <!-- ===== SIDEBAR OVERLAY ===== -->
   <div id="sidebar-overlay" class="hidden"></div>
 
   <!-- ===== SIDEBAR ===== -->
-  <aside id="sidebar" class="fixed top-0 bottom-0 left-0 z-50 w-64 bg-white border-r border-slate-100 flex flex-col justify-between py-6 px-4 md:translate-x-0 transition-transform duration-300">
-    <div class="space-y-6">
-      <!-- Logo & Brand -->
-      <div class="flex items-center justify-between px-2">
-        <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center shadow-md shadow-blue-500/10">
-            <svg width="20" height="20" viewBox="0 0 28 28" fill="none">
-              <path d="M14 2L4 7v7c0 6.1 4.3 11.8 10 13 5.7-1.2 10-6.9 10-13V7L14 2z" fill="white"/>
-              <path d="M9 14l3 3 7-7" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <div>
-            <span class="text-base font-extrabold tracking-tight text-slate-800">Cognitia</span>
-            <span class="ml-1 px-1.5 py-0.5 text-[9px] font-bold bg-blue-50 text-blue-600 rounded-full border border-blue-100">GURU</span>
-          </div>
-        </div>
-        <button id="sidebar-close" class="md:hidden text-slate-400 hover:text-slate-600 p-1 rounded-lg">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
-        </button>
-      </div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-text">Cognitia</span>
+      </a>
+      <button class="sidebar-close" id="sidebar-close" aria-label="Close Sidebar">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
 
       <!-- Profile Card inside Sidebar -->
       <div class="bg-slate-50/50 border border-slate-100 rounded-2xl p-4 flex items-center gap-3">
