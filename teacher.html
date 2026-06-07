@@ -19,6 +19,24 @@
         extend: {
           fontFamily: {
             sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+          },
+          colors: {
+            blue: {
+              50: '#f4f9fc',
+              100: '#e0f2fe',
+              200: '#bae6fd',
+              300: '#7dd3fc',
+              400: '#38bdf8',
+              500: '#66B8D4', /* Cognitia Primary */
+              600: '#4da6c3', /* Hover variant */
+              700: '#3b8ba6',
+              800: '#32748a',
+              900: '#2c6173',
+            },
+            indigo: {
+              500: '#66B8D4',
+              600: '#4da6c3',
+            }
           }
         }
       }
@@ -33,9 +51,10 @@
 
     /* Sidebar active indicator */
     .sidebar-link.active {
-      background-color: #EFF6FF !important;
-      color: #2563EB !important;
+      background-color: #f4f9fc !important;
+      color: #66B8D4 !important;
       font-weight: 600 !important;
+      border-right: 3px solid #66B8D4 !important;
     }
 
     /* Section visibility control */
@@ -67,8 +86,8 @@
 
     /* Student card styling */
     .student-card {
-      background-color: white !important;
-      border: 1px solid #F1F5F9 !important;
+      background-color: #f4f9fc !important;
+      border: 1px solid #e2e8f0 !important;
       border-radius: 1rem !important;
       padding: 1.25rem !important;
       cursor: pointer !important;
@@ -80,8 +99,9 @@
     }
     .student-card:hover {
       transform: translateY(-4px) !important;
-      border-color: #3B82F6 !important;
-      box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.05), 0 10px 10px -5px rgba(59, 130, 246, 0.02) !important;
+      border-color: #66B8D4 !important;
+      background-color: #ffffff !important;
+      box-shadow: 0 20px 25px -5px rgba(102, 184, 212, 0.1), 0 10px 10px -5px rgba(102, 184, 212, 0.04) !important;
     }
     .scard-header {
       display: flex !important;
@@ -136,8 +156,8 @@
 
     /* Subject detail grid cards */
     .subject-card {
-      background-color: white !important;
-      border: 1px solid #F1F5F9 !important;
+      background-color: #f4f9fc !important;
+      border: 1px solid #e2e8f0 !important;
       border-radius: 1rem !important;
       padding: 1.25rem !important;
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.01) !important;
@@ -249,11 +269,15 @@
       font-size: 0.75rem;
     }
 
-    /* Mobile drawer states */
+    /* Mobile drawer states & Desktop fixed sidebar */
     @media (max-width: 767px) {
       #sidebar {
         transform: translateX(-100%);
         transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: fixed !important;
+        top: 0;
+        bottom: 0;
+        z-index: 50;
       }
       #sidebar.active {
         transform: translateX(0);
@@ -270,6 +294,35 @@
         display: block;
       }
     }
+    
+    @media (min-width: 768px) {
+      #sidebar {
+        position: fixed !important;
+        top: 0;
+        bottom: 0;
+        z-index: 40;
+      }
+    }
+
+    /* ====== TABLE SPACING IMPROVEMENTS ====== */
+    th, td {
+      padding: 1.25rem 1rem !important; /* Larger padding for airy, breathable rows */
+      vertical-align: middle;
+    }
+    th {
+      border-bottom: 2px solid #f1f5f9 !important;
+      color: #64748b;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    td {
+      border-bottom: 1px solid #f1f5f9 !important;
+      color: #334155;
+    }
+    tr:hover td {
+      background-color: rgba(244, 249, 252, 0.4); /* subtle highlight on hover */
+    }
 
     /* ====== HOVER EFFECTS — same mechanics as index.html ====== */
 
@@ -282,6 +335,7 @@
       position: relative !important;
       overflow: hidden !important;
       z-index: 1 !important;
+      display: block !important; /* overrides display:flex from style.css */
     }
     .insight-card::before {
       content: '' !important;
@@ -428,6 +482,9 @@
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
       <a href="index.html" class="nav-logo">
+        <div class="logo-icon">
+          <img src="logo.png" alt="Cognitia Logo" style="width: 28px; height: 28px; object-fit: contain;" />
+        </div>
         <span class="logo-text">Cognitia</span>
       </a>
       <button class="sidebar-close" id="sidebar-close" aria-label="Close Sidebar">
@@ -435,44 +492,63 @@
       </button>
     </div>
 
-      <!-- Profile Card inside Sidebar -->
-      <div class="bg-slate-50/50 border border-slate-100 rounded-2xl p-4 flex items-center gap-3">
-        <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-500 to-indigo-600 text-white font-bold flex items-center justify-center shadow-inner text-sm" id="sb-avatar">
-          PB
-        </div>
-        <div class="flex flex-col text-left overflow-hidden">
-          <span class="text-sm font-bold text-slate-800 leading-tight truncate" id="sb-teacher-name">Pak Budi</span>
-          <span class="text-[10px] text-slate-400 mt-0.5 truncate" id="sb-class">Wali Kelas X-1</span>
-        </div>
+    <!-- Teacher Profile -->
+    <div class="sidebar-profile">
+      <div class="profile-avatar" id="sb-avatar">PB</div>
+      <div class="profile-info">
+        <span class="profile-name" id="sb-teacher-name">Pak Budi</span>
+        <span class="profile-class" id="sb-class">Wali Kelas X-1</span>
       </div>
-
-      <!-- Navigation Links -->
-      <nav class="space-y-1">
-        <a href="#" class="sidebar-link active flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 text-slate-500 hover:text-slate-900" data-section="dashboard" id="nav-dashboard">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-          <span>Dashboard</span>
-        </a>
-        <a href="#" class="sidebar-link flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium text-slate-500 hover:text-slate-900 transition-all duration-200" data-section="students" id="nav-students">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          <span>Daftar Siswa</span>
-        </a>
-        <a href="#" class="sidebar-link flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium text-slate-500 hover:text-slate-900 transition-all duration-200" data-section="ranking" id="nav-ranking">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5C7 4 7 7 7 7"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5C17 4 17 7 17 7"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
-          <span>Ranking Kelas</span>
-        </a>
-      </nav>
     </div>
 
-    <!-- Bottom Actions (Logout) -->
-    <div>
-      <a href="index.html" class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-semibold text-red-500 hover:bg-red-50 hover:text-red-650 transition-colors" id="nav-back-home">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <div class="sidebar-divider"></div>
+
+    <!-- Navigation -->
+    <nav class="sidebar-nav">
+      <p class="nav-section-label">MENU UTAMA</p>
+      <a href="#" class="sidebar-link active" data-section="dashboard" id="nav-dashboard">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        <span>Dashboard</span>
+      </a>
+      <a href="#" class="sidebar-link" data-section="students" id="nav-students">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <span>Daftar Siswa</span>
+      </a>
+      <a href="#" class="sidebar-link" data-section="ranking" id="nav-ranking">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5C7 4 7 7 7 7"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5C17 4 17 7 17 7"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+        <span>Ranking Kelas</span>
+      </a>
+      <a href="#" class="sidebar-link" data-section="kehadiran" id="nav-kehadiran">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+          <polyline points="9 16 11 18 15 14"></polyline>
+        </svg>
+        <span>Kehadiran</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-divider"></div>
+
+    <nav class="sidebar-nav">
+      <p class="nav-section-label">LAINNYA</p>
+      <a href="index.html" class="group bg-red-100 flex items-center gap-2 p-2 rounded-lg hover:bg-red-200 sidebar-logout transition-colors" id="nav-back-home">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" 
+            stroke="currentColor" 
+            class="text-red-600 group-hover:text-red-700 transition-colors" 
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
           <polyline points="16 17 21 12 16 7"></polyline>
           <line x1="21" y1="12" x2="9" y2="12"></line>
         </svg>
-        <span>Log Out</span>
+        <span class="font-bold text-red-600 group-hover:text-red-700 transition-colors">Log Out</span>
       </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <p>Cognitia &copy; 2025</p>
     </div>
   </aside>
 
@@ -518,27 +594,40 @@
           </div>
         </div>
 
-        <!-- School Hero Banner Card with Full Unsplash Background -->
-        <div class="relative overflow-hidden rounded-3xl p-6 sm:p-8 text-white mb-8 shadow-lg shadow-blue-500/5 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=1000&auto=format&fit=crop');">
-          <!-- Gradient Overlay for excellent text contrast -->
-          <div class="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-900/60 to-transparent z-10"></div>
+        <!-- School Hero Banner matching index.html style -->
+        <div class="relative overflow-hidden rounded-3xl bg-white border border-slate-100 p-8 sm:p-10 mb-8 shadow-sm flex flex-col md:flex-row items-center gap-8" style="background-image: linear-gradient(to right, rgba(102, 184, 212, 0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(102, 184, 212, 0.08) 1px, transparent 1px); background-size: 24px 24px;">
+          <!-- Gradient underlay for better contrast -->
+          <div class="absolute inset-0 bg-gradient-to-r from-blue-50/80 to-transparent z-10 pointer-events-none"></div>
           
-          <div class="relative z-20 max-w-xl">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold bg-white/20 backdrop-blur-md text-blue-50 mb-4 border border-white/10">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          <div class="relative z-20 flex-1">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#f4f9fc] text-[#66B8D4] mb-4 border border-[#e2e8f0]">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
               Tahun Ajaran 2025/2026 • Genap
             </span>
-            <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight">
-              Selamat Datang Kembali, <span id="header-teacher-name" class="text-amber-300">Pak Budi</span>!
+            <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-800 leading-tight">
+              Selamat Datang Kembali,<br/>
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#3a97b5] to-[#66B8D4]" id="header-teacher-name">Pak Budi</span>!
             </h1>
-            <p class="text-sm text-slate-100/90 mt-2 leading-relaxed font-medium">
-              Pantau perkembangan akademik, statistik nilai, dan grafik pencapaian belajar siswa kelas <strong>X-1</strong> secara mudah dalam satu ruang kerja.
+            <p class="text-sm text-slate-500 mt-4 leading-relaxed font-medium max-w-md">
+              Pantau perkembangan akademik, statistik nilai, dan kehadiran siswa kelas <strong>X-1</strong> secara mudah dalam satu ruang kerja.
             </p>
-            <div class="flex items-center gap-4 mt-6 pt-4 border-t border-white/10 text-xs">
+            <div class="flex items-center gap-4 mt-8 pt-6 border-t border-slate-100 text-xs">
               <div>
-                <span class="text-slate-350">Agenda Terdekat:</span>
-                <span class="font-semibold block text-white">Penilaian Akhir Semester (PAS) - 2 Minggu Lagi</span>
+                <span class="text-slate-400">Agenda Terdekat:</span>
+                <span class="font-bold block text-slate-700">Penilaian Akhir Semester (PAS) - 2 Minggu Lagi</span>
               </div>
+            </div>
+          </div>
+          
+          <div class="relative flex-1 flex justify-center items-center w-full max-w-[300px] md:max-w-none">
+            <img src="hero_vector.png" alt="Ilustrasi Pantau Akademik" class="w-full h-auto max-h-64 object-contain" style="mix-blend-mode: multiply;" />
+            <!-- Floating badge matching index.html -->
+            <div class="absolute top-4 -left-4 md:-left-8 bg-white border border-slate-100 px-3 py-2 rounded-xl shadow-lg flex items-center gap-2 animate-bounce" style="animation-duration: 3s;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#66B8D4" stroke-width="2">
+                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                <polyline points="17 6 23 6 23 12" />
+              </svg>
+              <span class="text-xs font-bold text-slate-700">Tren Positif!</span>
             </div>
           </div>
         </div>
@@ -552,9 +641,9 @@
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
               </div>
             </div>
-            <div class="flex items-baseline gap-2">
+            <div class="flex flex-col">
               <span class="text-3xl font-extrabold text-slate-800 font-sans" id="val-total">—</span>
-              <span class="text-sm text-slate-400">Kelas X-1</span>
+              <span class="text-sm text-slate-400 mt-1">Kelas X-1</span>
             </div>
           </div>
 
@@ -566,9 +655,9 @@
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
               </div>
             </div>
-            <div class="flex items-baseline gap-2">
+            <div class="flex flex-col">
               <span class="text-3xl font-extrabold text-slate-800 font-sans" id="val-class-avg">—</span>
-              <span class="text-sm text-slate-400">Semester Genap</span>
+              <span class="text-sm text-slate-400 mt-1">Semester Genap</span>
             </div>
           </div>
 
@@ -732,7 +821,7 @@
           <!-- Detailed Grades Grid -->
           <div>
             <h3 class="text-lg font-bold text-slate-800 mb-4">Nilai Akademik</h3>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6" id="detail-grades-grid">
+            <div class="grid grid-cols-2 gap-4 sm:gap-6" id="detail-grades-grid">
               <!-- Injected by JS -->
             </div>
           </div>
@@ -740,7 +829,7 @@
           <!-- Reports Grid -->
           <div>
             <h3 class="text-lg font-bold text-slate-800 mb-4">Laporan Hasil Belajar</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="detail-report-grid">
+            <div class="grid grid-cols-2 gap-4 sm:gap-6" id="detail-report-grid">
               <!-- Injected by JS -->
             </div>
           </div>
@@ -783,6 +872,39 @@
         </div>
       </section>
 
+      <!-- ===== SECTION: KEHADIRAN ===== -->
+      <section class="dash-section" id="section-kehadiran">
+        <div class="mb-8">
+          <h2 class="text-2xl font-bold text-slate-800 tracking-tight">Rekap Kehadiran Siswa</h2>
+          <p class="text-sm text-slate-500 mt-1">Data absensi harian dan rekapitulasi tingkat partisipasi kelas.</p>
+        </div>
+
+        <div class="bg-white border border-slate-100 rounded-3xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.02)]">
+          <div class="mb-6">
+            <h3 class="text-base font-bold text-slate-800">Tabel Statistik Kehadiran</h3>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="border-b border-slate-100 text-xs font-semibold text-slate-400 uppercase tracking-wider">
+                  <th class="pb-3 font-semibold">No</th>
+                  <th class="pb-3 font-semibold">Nama Siswa</th>
+                  <th class="pb-3 font-semibold">Hadir</th>
+                  <th class="pb-3 font-semibold">Sakit</th>
+                  <th class="pb-3 font-semibold">Izin</th>
+                  <th class="pb-3 font-semibold">Alfa</th>
+                  <th class="pb-3 font-semibold">Persentase</th>
+                  <th class="pb-3 font-semibold">Status</th>
+                </tr>
+              </thead>
+              <tbody id="attendance-table-body" class="divide-y divide-slate-50 text-sm text-slate-650">
+                <!-- Injected by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
     </div>
   </main>
 
@@ -799,6 +921,16 @@
     <a href="#" class="bottom-nav-item flex flex-col items-center gap-1 text-[10px] font-semibold text-slate-400 transition-colors" data-section="ranking" id="bn-ranking">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5C7 4 7 7 7 7"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5C17 4 17 7 17 7"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
       <span>Ranking</span>
+    </a>
+    <a href="#" class="bottom-nav-item flex flex-col items-center gap-1 text-[10px] font-semibold text-slate-400 transition-colors" data-section="kehadiran" id="bn-kehadiran">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+        <line x1="16" y1="2" x2="16" y2="6"></line>
+        <line x1="8" y1="2" x2="8" y2="6"></line>
+        <line x1="3" y1="10" x2="21" y2="10"></line>
+        <polyline points="9 16 11 18 15 14"></polyline>
+      </svg>
+      <span>Kehadiran</span>
     </a>
   </nav>
 

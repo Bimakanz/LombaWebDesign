@@ -2179,10 +2179,6 @@ button {
   font-size: 1.25rem;
 }
 
-/* Detail view specific grid overrides */
-#detail-grades-grid, #detail-report-grid {
-  grid-template-columns: 1fr;
-}
 
 @keyframes blob-1 {
   0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }

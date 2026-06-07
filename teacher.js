@@ -8,42 +8,42 @@ const teacherData = {
 
 // 20 Hardcoded Students Data
 const studentsData = [
-  { nis: "242501001", nama: "Aditya Pratama", grades: { "Matematika": 88, "B. Indonesia": 85, "B. Inggris": 82, "PAI": 90, "Tahfidz": 85, "PKK": 80, "PKN": 88, "PJOK": 92, "Informatika": 95 }, history: [82, 85, 84, 88] },
-  { nis: "242501002", nama: "Anisa Rahmawati", grades: { "Matematika": 92, "B. Indonesia": 90, "B. Inggris": 88, "PAI": 95, "Tahfidz": 92, "PKK": 85, "PKN": 90, "PJOK": 88, "Informatika": 90 }, history: [85, 88, 90, 91] },
-  { nis: "242501003", nama: "Bagas Saputra", grades: { "Matematika": 78, "B. Indonesia": 80, "B. Inggris": 75, "PAI": 85, "Tahfidz": 80, "PKK": 78, "PKN": 82, "PJOK": 90, "Informatika": 85 }, history: [75, 78, 77, 80] },
-  { nis: "242501004", nama: "Citra Lestari", grades: { "Matematika": 85, "B. Indonesia": 88, "B. Inggris": 90, "PAI": 92, "Tahfidz": 88, "PKK": 82, "PKN": 85, "PJOK": 85, "Informatika": 88 }, history: [80, 82, 85, 87] },
-  { nis: "242501005", nama: "Dedi Kurniawan", grades: { "Matematika": 80, "B. Indonesia": 82, "B. Inggris": 78, "PAI": 88, "Tahfidz": 82, "PKK": 80, "PKN": 80, "PJOK": 95, "Informatika": 82 }, history: [78, 80, 81, 82] },
-  { nis: "242501006", nama: "Eka Putri", grades: { "Matematika": 95, "B. Indonesia": 92, "B. Inggris": 94, "PAI": 98, "Tahfidz": 95, "PKK": 90, "PKN": 92, "PJOK": 90, "Informatika": 96 }, history: [88, 90, 92, 94] },
-  { nis: "242501007", nama: "Fajar Ramadhan", grades: { "Matematika": 75, "B. Indonesia": 78, "B. Inggris": 70, "PAI": 82, "Tahfidz": 75, "PKK": 72, "PKN": 78, "PJOK": 88, "Informatika": 80 }, history: [70, 72, 74, 76] },
-  { nis: "242501008", nama: "Gita Permata", grades: { "Matematika": 82, "B. Indonesia": 85, "B. Inggris": 80, "PAI": 90, "Tahfidz": 85, "PKK": 82, "PKN": 84, "PJOK": 82, "Informatika": 85 }, history: [78, 80, 81, 83] },
-  { nis: "242501009", nama: "Hendra Wijaya", grades: { "Matematika": 88, "B. Indonesia": 82, "B. Inggris": 85, "PAI": 88, "Tahfidz": 80, "PKK": 84, "PKN": 86, "PJOK": 90, "Informatika": 92 }, history: [82, 84, 85, 87] },
-  { nis: "242501010", nama: "Indah Cahyani", grades: { "Matematika": 90, "B. Indonesia": 92, "B. Inggris": 95, "PAI": 96, "Tahfidz": 94, "PKK": 88, "PKN": 90, "PJOK": 85, "Informatika": 94 }, history: [86, 88, 90, 92] },
-  { nis: "242501011", nama: "Joko Susilo", grades: { "Matematika": 72, "B. Indonesia": 75, "B. Inggris": 70, "PAI": 80, "Tahfidz": 72, "PKK": 70, "PKN": 75, "PJOK": 85, "Informatika": 78 }, history: [68, 70, 72, 73] },
-  { nis: "242501012", nama: "Kartika Sari", grades: { "Matematika": 86, "B. Indonesia": 84, "B. Inggris": 82, "PAI": 92, "Tahfidz": 88, "PKK": 80, "PKN": 85, "PJOK": 88, "Informatika": 90 }, history: [80, 82, 84, 86] },
-  { nis: "242501013", nama: "Lucky Firman", grades: { "Matematika": 80, "B. Indonesia": 78, "B. Inggris": 75, "PAI": 85, "Tahfidz": 80, "PKK": 78, "PKN": 82, "PJOK": 92, "Informatika": 84 }, history: [75, 77, 79, 81] },
-  { nis: "242501014", nama: "Maya Audina", grades: { "Matematika": 94, "B. Indonesia": 95, "B. Inggris": 92, "PAI": 96, "Tahfidz": 95, "PKK": 90, "PKN": 94, "PJOK": 88, "Informatika": 96 }, history: [88, 91, 93, 94] },
-  { nis: "242501015", nama: "Naufal Aziz", grades: { "Matematika": 82, "B. Indonesia": 80, "B. Inggris": 85, "PAI": 88, "Tahfidz": 82, "PKK": 84, "PKN": 80, "PJOK": 95, "Informatika": 88 }, history: [80, 82, 83, 85] },
-  { nis: "242501016", nama: "Olivia Zalianty", grades: { "Matematika": 88, "B. Indonesia": 90, "B. Inggris": 86, "PAI": 94, "Tahfidz": 90, "PKK": 85, "PKN": 88, "PJOK": 82, "Informatika": 90 }, history: [82, 85, 87, 88] },
-  { nis: "242501017", nama: "Putra Bangsa", grades: { "Matematika": 76, "B. Indonesia": 80, "B. Inggris": 72, "PAI": 84, "Tahfidz": 78, "PKK": 75, "PKN": 80, "PJOK": 90, "Informatika": 82 }, history: [72, 75, 77, 79] },
-  { nis: "242501018", nama: "Qonita Syahidah", grades: { "Matematika": 96, "B. Indonesia": 94, "B. Inggris": 98, "PAI": 100, "Tahfidz": 98, "PKK": 95, "PKN": 96, "PJOK": 92, "Informatika": 98 }, history: [90, 93, 95, 96] },
-  { nis: "242501019", nama: "Rizky Ramadhan", grades: { "Matematika": 84, "B. Indonesia": 82, "B. Inggris": 80, "PAI": 88, "Tahfidz": 84, "PKK": 82, "PKN": 84, "PJOK": 94, "Informatika": 88 }, history: [78, 81, 83, 85] },
-  { nis: "242501020", nama: "Siti Aminah", grades: { "Matematika": 90, "B. Indonesia": 88, "B. Inggris": 85, "PAI": 95, "Tahfidz": 92, "PKK": 88, "PKN": 90, "PJOK": 85, "Informatika": 92 }, history: [84, 87, 89, 90] }
+  { nis: "242501001", nama: "Aditya Pratama", grades: { "Matematika": 88, "B. Indonesia": 85, "B. Inggris": 82, "PAI": 90, "Tahfidz": 85, "PKK": 80, "PKN": 88, "PJOK": 92, "Informatika": 95 }, history: [82, 85, 84, 88], kehadiran: { hadir: 115, sakit: 2, izin: 3, alfa: 0, persentase: 95.8 } },
+  { nis: "242501002", nama: "Anisa Rahmawati", grades: { "Matematika": 92, "B. Indonesia": 90, "B. Inggris": 88, "PAI": 95, "Tahfidz": 92, "PKK": 85, "PKN": 90, "PJOK": 88, "Informatika": 90 }, history: [85, 88, 90, 91], kehadiran: { hadir: 118, sakit: 1, izin: 1, alfa: 0, persentase: 98.3 } },
+  { nis: "242501003", nama: "Bagas Saputra", grades: { "Matematika": 78, "B. Indonesia": 80, "B. Inggris": 75, "PAI": 85, "Tahfidz": 80, "PKK": 78, "PKN": 82, "PJOK": 90, "Informatika": 85 }, history: [75, 78, 77, 80], kehadiran: { hadir: 110, sakit: 5, izin: 3, alfa: 2, persentase: 91.6 } },
+  { nis: "242501004", nama: "Citra Lestari", grades: { "Matematika": 85, "B. Indonesia": 88, "B. Inggris": 90, "PAI": 92, "Tahfidz": 88, "PKK": 82, "PKN": 85, "PJOK": 85, "Informatika": 88 }, history: [80, 82, 85, 87], kehadiran: { hadir: 116, sakit: 2, izin: 2, alfa: 0, persentase: 96.6 } },
+  { nis: "242501005", nama: "Dedi Kurniawan", grades: { "Matematika": 80, "B. Indonesia": 82, "B. Inggris": 78, "PAI": 88, "Tahfidz": 82, "PKK": 80, "PKN": 80, "PJOK": 95, "Informatika": 82 }, history: [78, 80, 81, 82], kehadiran: { hadir: 112, sakit: 4, izin: 3, alfa: 1, persentase: 93.3 } },
+  { nis: "242501006", nama: "Eka Putri", grades: { "Matematika": 95, "B. Indonesia": 92, "B. Inggris": 94, "PAI": 98, "Tahfidz": 95, "PKK": 90, "PKN": 92, "PJOK": 90, "Informatika": 96 }, history: [88, 90, 92, 94], kehadiran: { hadir: 120, sakit: 0, izin: 0, alfa: 0, persentase: 100 } },
+  { nis: "242501007", nama: "Fajar Ramadhan", grades: { "Matematika": 75, "B. Indonesia": 78, "B. Inggris": 70, "PAI": 82, "Tahfidz": 75, "PKK": 72, "PKN": 78, "PJOK": 88, "Informatika": 80 }, history: [70, 72, 74, 76], kehadiran: { hadir: 108, sakit: 6, izin: 4, alfa: 2, persentase: 90.0 } },
+  { nis: "242501008", nama: "Gita Permata", grades: { "Matematika": 82, "B. Indonesia": 85, "B. Inggris": 80, "PAI": 90, "Tahfidz": 85, "PKK": 82, "PKN": 84, "PJOK": 82, "Informatika": 85 }, history: [78, 80, 81, 83], kehadiran: { hadir: 117, sakit: 1, izin: 2, alfa: 0, persentase: 97.5 } },
+  { nis: "242501009", nama: "Hendra Wijaya", grades: { "Matematika": 88, "B. Indonesia": 82, "B. Inggris": 85, "PAI": 88, "Tahfidz": 80, "PKK": 84, "PKN": 86, "PJOK": 90, "Informatika": 92 }, history: [82, 84, 85, 87], kehadiran: { hadir: 114, sakit: 3, izin: 2, alfa: 1, persentase: 95.0 } },
+  { nis: "242501010", nama: "Indah Cahyani", grades: { "Matematika": 90, "B. Indonesia": 92, "B. Inggris": 95, "PAI": 96, "Tahfidz": 94, "PKK": 88, "PKN": 90, "PJOK": 85, "Informatika": 94 }, history: [86, 88, 90, 92], kehadiran: { hadir: 119, sakit: 1, izin: 0, alfa: 0, persentase: 99.1 } },
+  { nis: "242501011", nama: "Joko Susilo", grades: { "Matematika": 72, "B. Indonesia": 75, "B. Inggris": 70, "PAI": 80, "Tahfidz": 72, "PKK": 70, "PKN": 75, "PJOK": 85, "Informatika": 78 }, history: [68, 70, 72, 73], kehadiran: { hadir: 105, sakit: 8, izin: 4, alfa: 3, persentase: 87.5 } },
+  { nis: "242501012", nama: "Kartika Sari", grades: { "Matematika": 86, "B. Indonesia": 84, "B. Inggris": 82, "PAI": 92, "Tahfidz": 88, "PKK": 80, "PKN": 85, "PJOK": 88, "Informatika": 90 }, history: [80, 82, 84, 86], kehadiran: { hadir: 115, sakit: 3, izin: 2, alfa: 0, persentase: 95.8 } },
+  { nis: "242501013", nama: "Lucky Firman", grades: { "Matematika": 80, "B. Indonesia": 78, "B. Inggris": 75, "PAI": 85, "Tahfidz": 80, "PKK": 78, "PKN": 82, "PJOK": 92, "Informatika": 84 }, history: [75, 77, 79, 81], kehadiran: { hadir: 112, sakit: 2, izin: 4, alfa: 2, persentase: 93.3 } },
+  { nis: "242501014", nama: "Maya Audina", grades: { "Matematika": 94, "B. Indonesia": 95, "B. Inggris": 92, "PAI": 96, "Tahfidz": 95, "PKK": 90, "PKN": 94, "PJOK": 88, "Informatika": 96 }, history: [88, 91, 93, 94], kehadiran: { hadir: 118, sakit: 1, izin: 1, alfa: 0, persentase: 98.3 } },
+  { nis: "242501015", nama: "Naufal Aziz", grades: { "Matematika": 82, "B. Indonesia": 80, "B. Inggris": 85, "PAI": 88, "Tahfidz": 82, "PKK": 84, "PKN": 80, "PJOK": 95, "Informatika": 88 }, history: [80, 82, 83, 85], kehadiran: { hadir: 113, sakit: 4, izin: 2, alfa: 1, persentase: 94.1 } },
+  { nis: "242501016", nama: "Olivia Zalianty", grades: { "Matematika": 88, "B. Indonesia": 90, "B. Inggris": 86, "PAI": 94, "Tahfidz": 90, "PKK": 85, "PKN": 88, "PJOK": 82, "Informatika": 90 }, history: [82, 85, 87, 88], kehadiran: { hadir: 116, sakit: 2, izin: 2, alfa: 0, persentase: 96.6 } },
+  { nis: "242501017", nama: "Putra Bangsa", grades: { "Matematika": 76, "B. Indonesia": 80, "B. Inggris": 72, "PAI": 84, "Tahfidz": 78, "PKK": 75, "PKN": 80, "PJOK": 90, "Informatika": 82 }, history: [72, 75, 77, 79], kehadiran: { hadir: 110, sakit: 5, izin: 3, alfa: 2, persentase: 91.6 } },
+  { nis: "242501018", nama: "Qonita Syahidah", grades: { "Matematika": 96, "B. Indonesia": 94, "B. Inggris": 98, "PAI": 100, "Tahfidz": 98, "PKK": 95, "PKN": 96, "PJOK": 92, "Informatika": 98 }, history: [90, 93, 95, 96], kehadiran: { hadir: 120, sakit: 0, izin: 0, alfa: 0, persentase: 100 } },
+  { nis: "242501019", nama: "Rizky Ramadhan", grades: { "Matematika": 84, "B. Indonesia": 82, "B. Inggris": 80, "PAI": 88, "Tahfidz": 84, "PKK": 82, "PKN": 84, "PJOK": 94, "Informatika": 88 }, history: [78, 81, 83, 85], kehadiran: { hadir: 114, sakit: 3, izin: 3, alfa: 0, persentase: 95.0 } },
+  { nis: "242501020", nama: "Siti Aminah", grades: { "Matematika": 90, "B. Indonesia": 88, "B. Inggris": 85, "PAI": 95, "Tahfidz": 92, "PKK": 88, "PKN": 90, "PJOK": 85, "Informatika": 92 }, history: [84, 87, 89, 90], kehadiran: { hadir: 118, sakit: 2, izin: 0, alfa: 0, persentase: 98.3 } }
 ];
 
 const subjects = ["Matematika", "B. Indonesia", "B. Inggris", "PAI", "Tahfidz", "PKK", "PKN", "PJOK", "Informatika"];
 
 const colors = {
-  primary: '#3B82F6',
-  primaryLight: '#60A5FA',
-  secondary: '#93C5FD',
-  secondaryLight: '#DBEAFE',
-  purple: '#8B5CF6',
-  orange: '#F59E0B',
-  teal: '#10B981',
-  pink: '#EC4899',
-  gray: '#94A3B8',
-  textMuted: '#64748B',
-  accentRed: '#EF4444'
+  primary: '#66B8D4',
+  primaryLight: '#8ecce0',
+  secondary: '#90d3ec',
+  secondaryLight: '#bde7f7',
+  purple: '#78909c',
+  orange: '#f59e0b',
+  teal: '#10b981',
+  pink: '#ec4899',
+  gray: '#94a3b8',
+  textMuted: '#64748b',
+  accentRed: '#ef4444'
 };
 
 const mapelColors = [colors.primary, colors.purple, colors.teal, colors.orange, colors.pink, colors.secondary, colors.primaryLight, colors.purple, colors.teal];
@@ -73,6 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderSummaryTable();
   renderStudentCards();
   renderRanking();
+  renderAttendanceTable();
 
   // Detail Panel Back Button
   document.getElementById('detail-back-btn').addEventListener('click', () => {
@@ -197,7 +198,7 @@ function renderDashboardCharts(stats) {
         data: subjects.map(s => stats.subjectAverages[s]),
         backgroundColor: mapelColors,
         borderRadius: 8,
-        barThickness: 20
+        maxBarThickness: 48
       }]
     },
     options: {
@@ -238,16 +239,16 @@ function renderDashboardCharts(stats) {
       datasets: [{
         label: 'Rata-rata Kelas',
         data: stats.semesterAverages,
-        borderColor: '#2563EB',
+        borderColor: colors.primary,
         borderWidth: 3,
         pointBackgroundColor: '#FFFFFF',
-        pointBorderColor: '#2563EB',
+        pointBorderColor: colors.primary,
         pointBorderWidth: 2,
         pointHoverRadius: 6,
-        pointHoverBackgroundColor: '#2563EB',
+        pointHoverBackgroundColor: colors.primary,
         pointHoverBorderColor: '#FFFFFF',
         pointHoverBorderWidth: 2,
-        backgroundColor: 'rgba(37, 99, 235, 0.04)',
+        backgroundColor: 'rgba(102, 184, 212, 0.1)',
         fill: true,
         tension: 0.35
       }]
@@ -437,7 +438,7 @@ function renderDetailBarChart(student) {
         data: subjects.map(s => student.grades[s]),
         backgroundColor: mapelColors,
         borderRadius: 8,
-        barThickness: 20
+        maxBarThickness: 48
       }]
     },
     options: {
@@ -548,6 +549,27 @@ function renderRanking() {
       <td>${s.total}</td>
       <td><strong>${s.avg}</strong></td>
       <td><span class="badge ${s.avg >= 85 ? 'excellent' : 'good'}">${s.avg >= 85 ? 'Lulus (Baik)' : 'Lulus'}</span></td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function renderAttendanceTable() {
+  const tbody = document.getElementById('attendance-table-body');
+  if (!tbody) return;
+  tbody.innerHTML = '';
+  
+  studentsData.forEach((s, i) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${i + 1}</td>
+      <td>${s.nama}</td>
+      <td class="text-emerald-600 font-medium">${s.kehadiran.hadir}</td>
+      <td class="text-orange-500 font-medium">${s.kehadiran.sakit}</td>
+      <td class="text-blue-500 font-medium">${s.kehadiran.izin}</td>
+      <td class="text-rose-500 font-medium">${s.kehadiran.alfa}</td>
+      <td><strong>${s.kehadiran.persentase}%</strong></td>
+      <td><span class="badge ${s.kehadiran.persentase >= 95 ? 'excellent' : (s.kehadiran.persentase >= 90 ? 'good' : 'warning')}">${s.kehadiran.persentase >= 95 ? 'Sangat Baik' : (s.kehadiran.persentase >= 90 ? 'Baik' : 'Perhatian')}</span></td>
     `;
     tbody.appendChild(tr);
   });
